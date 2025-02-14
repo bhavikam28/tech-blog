@@ -23,19 +23,36 @@ jobs:
 
       # Step 3: Build the Hugo site
       - name: Build Hugo site
-        run: hugo 
+        run: hugo
 
+      # Step 4: List contents of public folder (for debugging)
       - name: List contents of public folder
         run: ls -l public/
 
-      # Step 4: Save the build output (for debugging)
+      # Step 5: Save the build output (for debugging)
       - name: Upload public folder
         uses: actions/upload-artifact@v4
         with:
           name: tech-blog
           path: public/*
 
-       # Step 5: Configure AWS credentials
+  deploy:
+    name: Publish
+    needs: build
+    runs-on: ubuntu-latest  # Specifies the runner for this job
+    permissions:
+      id-token: write  # Required for OpenID Connect (OIDC) to assume the IAM role
+      contents: read  # Grants read access to the repository's contents
+
+    steps:
+      # Step 1: Download the artifact from the previous job
+      - name: Download public folder
+        uses: actions/download-artifact@v4
+        with:
+          name: tech-blog
+          path: ./public  # Specify the path to download the artifact
+
+      # Step 2: Configure AWS credentials
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -43,5 +60,14 @@ jobs:
           role-to-assume: ${{ secrets.AWS_IAM_ROLE_ARN }}  # Use the secret here
           aws-region: us-east-1  # Replace with your AWS region
 
-     
- 
+      # Step 3: Sync public/ folder with S3 bucket (with --delete flag)
+      - name: Sync with S3 bucket
+        run: |
+          aws s3 sync ./public s3://${{ secrets.AWS_S3_BUCKET_NAME }} --delete  # Use the secret for the bucket name
+
+      # Step 4: Invalidate CloudFront cache
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
