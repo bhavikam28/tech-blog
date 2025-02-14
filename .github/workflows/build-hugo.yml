@@ -63,7 +63,7 @@ jobs:
       # Step 3: Sync public/ folder with S3 bucket (with --delete flag)
       - name: Sync with S3 bucket
         run: |
-          aws s3 sync ./public s3://${{ secrets.AWS_S3_BUCKET_NAME }} --delete  # Use the secret for the bucket name
+          aws s3 sync . s3://${{ secrets.AWS_S3_BUCKET_NAME }} --delete  # Use the secret for the bucket name
 
       # Step 4: Invalidate CloudFront cache
       - name: Invalidate CloudFront cache
