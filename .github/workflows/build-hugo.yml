@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: tech-blog
-          
+          path: public/**
 
   deploy:
     name: Publish
