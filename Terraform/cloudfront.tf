@@ -1,6 +1,6 @@
 #Cloudfront Funtion to Append Index.html to URLs
 resource "aws_cloudfront_function" "append_index_html" {
-  name    = "${var.bucket_name}-append-index"
+  name    = replace("${var.bucket_name}-append-index", ".", "-")     # Replace periods with hyphens
   runtime = "cloudfront-js-2.0"
   comment = "Appends index.html to URLs"
   publish = true
