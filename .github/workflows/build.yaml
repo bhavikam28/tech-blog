@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-22.04
     defaults:
       run:
-        working-directory: terraform
+        working-directory: Terraform
     outputs:
       s3_bucket: ${{ steps.tf_out.outputs.s3 }}
       cf_id: ${{ steps.tf_out.outputs.cfid }}
