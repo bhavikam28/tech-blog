@@ -8,7 +8,7 @@ categories: ["DevOps"]
 
 ---
 
-![alt text](/images/control tower.png)
+![alt text](/images/controltower.png)
 
 
 When I first started managing multiple AWS accounts, I thought AWS Organizations was the ultimate tool for the job. It helped me organize accounts into logical groups and apply service control policies, but I quickly realized it wasn’t enough. Ensuring security, compliance, and scalability across dozens of accounts still felt like a never-ending battle—until I discovered **AWS Control Tower**. In this post, I’ll share how Control Tower transformed my approach to multi-account management and why it’s a must-use tool for cloud security and efficiency.
@@ -46,13 +46,13 @@ AWS Control Tower is more than just a tool—it’s a framework designed to simp
 
 ### 1. Landing Zones: The Foundation of Control Tower
 
-![alt text](/images/landingzone.png)
-
 The first step was setting up **Landing Zones**. This created a clean, hierarchical structure for managing accounts. Here’s what I did:
 - Configured dedicated email aliases for the **Log Archive** and **Audit accounts**.
 - Established a **Management Account** to oversee everything.
 
 This structure helped me understand how to manage accounts and ensured clear boundaries between workloads.
+
+![alt text](/images/landingzone.png)
 
 ### 2. Organizational Units (OUs): Structuring My Environment
 I organized the environment into two primary **Organizational Units (OUs)**:
