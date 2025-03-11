@@ -142,7 +142,7 @@ theme = "LoveIt"
       # URL of the LOGO
       logo = ""
       # title name
-      name = "Bhavika Mantri"
+      name = "TechNest By Bhavika"
       # you can add extra information before the name (HTML format is supported), such as icons
       pre = ""
       # you can add extra information after the name (HTML format is supported), such as icons
@@ -198,7 +198,7 @@ theme = "LoveIt"
       # URL of avatar shown in home page (LINK_TO_YOUR_PHOTO_BELOW)
       avatarURL = "https://avatars.githubusercontent.com/u/162662692?v=4?"
       #  title shown in home page (HTML format is supported)
-      title = "Bhavika's Tech Blog"
+      title = "Bhavika Mantri"
       # subtitle shown in home page
       subtitle = "Cloud Journey ☁️ → Security First 🔒 → DevOps Excellence 🧑🏽‍💻 → Solving Challenges 🔧"
       # whether to use typeit animation for subtitle
@@ -228,7 +228,7 @@ theme = "LoveIt"
     Slidershare = ""
     Goodreads = ""
     Stackoverflow = ""
-    Medium = ""
+    Medium = "https://medium.com/@bhavi.28.mantri"
     Matrix = ""
     Hackernews = ""
     Soundcloud = ""
@@ -511,7 +511,7 @@ theme = "LoveIt"
 
 # Author config
 [author]
-  name = "YOUR_NAME"
+  name = "Bhavika Mantri"
   email = ""
   link = ""
 

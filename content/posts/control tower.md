@@ -5,14 +5,15 @@ draft: false
 tags: ["AWS", "devOps", "controltower"]
 categories: ["DevOps"]
 ---
+![alt text](<landing zone- control tower.png>)
 {{< figure src="/images/landing zone- control tower.PNG" title="Landing Zone Overview" >}}
 
-## Why I Chose AWS Control Tower Over Manual Management
+# Why I Chose AWS Control Tower Over Manual Management
 When I first started learning AWS, managing multiple accounts felt like a daunting task. Ensuring security, compliance, and scalability across dozens of accounts seemed overwhelming—until I discovered **AWS Control Tower**. In this post, I’ll share how Control Tower transformed my approach to multi-account management and why it’s a must-use tool for anyone serious about cloud security and efficiency.
 
 ---
 
-## What Makes AWS Control Tower a Game-Changer?
+# What Makes AWS Control Tower a Game-Changer?
 AWS Control Tower is more than just a tool—it’s a framework designed to simplify multi-account management while enforcing best practices. Here’s why it stood out to me:
 
 1. **Automated Setup**:
@@ -32,7 +33,7 @@ AWS Control Tower is more than just a tool—it’s a framework designed to simp
 
 ---
 
-## How I Built a Secure and Scalable Environment with Control Tower
+# How I Built a Secure and Scalable Environment with Control Tower
 {{< figure src="/images/landing zone ready.PNG">}}
 
 ### 1. Landing Zones: The Foundation of Control Tower
