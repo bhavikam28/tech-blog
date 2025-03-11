@@ -8,7 +8,7 @@ categories: ["DevOps"]
 
 ---
 
-![alt text](/images/landing-zone-control-tower.png)
+![alt text](/images/landing zone-control tower.png)
 
 
 When I first started learning AWS, managing multiple accounts felt like a daunting task. Ensuring security, compliance, and scalability across dozens of accounts seemed overwhelming—until I discovered **AWS Control Tower**. In this post, I’ll share how Control Tower transformed my approach to multi-account management and why it’s a must-use tool for cloud security and efficiency.
@@ -46,7 +46,7 @@ AWS Control Tower is more than just a tool—it’s a framework designed to simp
 
 ### 1. Landing Zones: The Foundation of Control Tower
 
-![alt text](/images/landing-zone-ready.png)
+![alt text](/images/landing zone ready.png)
 
 The first step was setting up **Landing Zones**. This created a clean, hierarchical structure for managing accounts. Here’s what I did:
 - Configured dedicated email aliases for the **Log Archive** and **Audit accounts**.
@@ -73,11 +73,11 @@ I created a dedicated **Development Account** within the **Sandbox OU**. This pr
 
 ### 5. AWS IAM Identity Center: Centralized Access Management
 
-![alt text](/images/aws-access-portal.png)
+![alt text](/images/aws access portal.png)
 
 The AWS IAM Identity Center (formerly AWS Single Sign-On) is a key component of Control Tower. It simplifies identity management and provides a centralized Access Portal for users to securely access AWS accounts and applications. Here’s how I used it:
 
-### AWS Access Portal:
+AWS Access Portal:
 - Users can log in to the portal and access their assigned AWS accounts and applications.
 - The portal allows filtering accounts by name, ID, or email address, making it easy to manage access across multiple accounts.
 - For example, I assigned roles like **AWSAdministratorAccess** and **AWSOrganizationFullAccess** to specific users, ensuring they had the right level of access.
