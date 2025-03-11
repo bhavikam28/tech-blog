@@ -1,19 +1,29 @@
 ---
 title: 'Secure Your Cloud: How AWS Control Tower Transforms Multi-Account Management'
 date: 2025-03-11
+author: "Bhavika Mantri"
 draft: false
-tags: ["AWS", "devOps", "controltower"]
+tags: ["AWS", "DevOps", "Control Tower", "Landing Zone"]
 categories: ["DevOps"]
----
-![alt text](<landing zone- control tower.png>)
-{{< figure src="/images/landing zone- control tower.PNG" title="Landing Zone Overview" >}}
 
-# Why I Chose AWS Control Tower Over Manual Management
+---
+
+![alt text](/images/aws-access-portal.png)
+![alt text](/images/landing-zone-ready.png)
+![alt text](/images/landing-zone-settings.png)
+![alt text](/images/landing-zone-control-tower.png)
+![alt text](/images/organizations.png)
+
 When I first started learning AWS, managing multiple accounts felt like a daunting task. Ensuring security, compliance, and scalability across dozens of accounts seemed overwhelming—until I discovered **AWS Control Tower**. In this post, I’ll share how Control Tower transformed my approach to multi-account management and why it’s a must-use tool for anyone serious about cloud security and efficiency.
 
 ---
 
-# What Makes AWS Control Tower a Game-Changer?
+### What is AWS Control Tower?
+AWS Control Tower (CT) is a fully managed service designed to simplify the setup and governance of a secure, multi-account AWS environment. It provides a centralized dashboard, automated compliance checks, and pre-packaged governance rules, ensuring that security is never compromised.
+
+---
+
+### What Makes AWS Control Tower a Game-Changer?
 AWS Control Tower is more than just a tool—it’s a framework designed to simplify multi-account management while enforcing best practices. Here’s why it stood out to me:
 
 1. **Automated Setup**:
@@ -33,8 +43,7 @@ AWS Control Tower is more than just a tool—it’s a framework designed to simp
 
 ---
 
-# How I Built a Secure and Scalable Environment with Control Tower
-{{< figure src="/images/landing zone ready.PNG">}}
+### How I Built a Secure and Scalable Environment with Control Tower
 
 ### 1. Landing Zones: The Foundation of Control Tower
 The first step was setting up **Landing Zones**. This created a clean, hierarchical structure for managing accounts. Here’s what I did:
@@ -67,14 +76,9 @@ To keep things running smoothly, I deployed a **CloudShell script** that:
 
 This automation not only saved me time but also helped me understand how to prevent unnecessary expenses.
 
-{{< figure src="/images/organizations.PNG">}}
-
 ---
-{{< figure src="/images/aws access portal.PNG">}}
-{{< figure src="/images/landing zone settings.PNG">}}
 
-
-## Key Takeaways
+### Key Takeaways
 By exploring Control Tower, Landing Zones, OUs, and IAM Identity Center, I gained a deeper understanding of:
 - **Centralized Management**: How to manage permissions and configurations across multiple accounts.
 - **Enhanced Security**: The importance of built-in guardrails and detective controls.
@@ -84,7 +88,7 @@ By exploring Control Tower, Landing Zones, OUs, and IAM Identity Center, I gaine
 
 ---
 
-## Final Thoughts
-AWS Control Tower is not just a tool—it’s a framework that simplifies multi-account management while enforcing best practices for security, compliance, and scalability. If you’re looking to secure and scale your AWS environment, I highly recommend giving Control Tower a try. It’s a game-changer, and I’m excited to see how it evolves as I continue learning.
+### Conclusion
+AWS Control Tower is more than just a management tool; it’s a comprehensive solution that addresses the challenges of multi-account AWS environments. By automating the setup process and enforcing governance across accounts, it allows organizations to focus on what they do best — innovate and grow.
 
-If you’ve explored AWS Control Tower or have questions about my experience, feel free to reach out! I’d love to hear your thoughts and learn from your journey too.
+Whether you’re a large enterprise or a small startup, AWS Control Tower can simplify your cloud journey and ensure that you’re always operating within the bounds of security and compliance. Start your journey with AWS Control Tower today and take control of your cloud environment.
