@@ -24,7 +24,7 @@ With hands-on experience in Infrastructure as Code (IaC), containerization, and 
 
 ### CERTIFICATIONS
 
-🛡️ AWS Certified Security - Specialty
-🏗️ AWS Certified Solutions Architect - Associate
-☁️ AWS Certified Cloud Practitioner
-🔍 Certified Information Systems Auditor (CISA)
+- 🛡️ AWS Certified Security - Specialty
+- 🏗️ AWS Certified Solutions Architect - Associate
+- ☁️ AWS Certified Cloud Practitioner
+- 🔍 Certified Information Systems Auditor (CISA)
