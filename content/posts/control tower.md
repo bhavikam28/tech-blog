@@ -16,7 +16,7 @@ When I first started managing multiple AWS accounts, I thought AWS Organizations
 ---
 
 ### What is AWS Control Tower?
-AWS Control Tower (CT) is a fully managed service designed to simplify the setup and governance of a secure, multi-account AWS environment. It provides a centralized dashboard, automated compliance checks, and pre-packaged governance rules, ensuring that security is never compromised.
+AWS Control Tower is a fully managed service designed to simplify the setup and governance of a secure, multi-account AWS environment. It provides a centralized dashboard, automated compliance checks, and pre-packaged governance rules, ensuring that security is never compromised.
 
 ---
 
