@@ -3,7 +3,7 @@ title: 'How I Boosted AWS Security and Efficiency with Multi-Account Management 
 date: 2025-03-11
 author: "Bhavika Mantri"
 draft: false
-tags: ["AWS", "DevOps", "Control Tower", "Landing Zone"]
+tags: ["AWS", "AWS Security", "DevOps", "Control Tower", "Landing Zone"]
 categories: ["DevOps"]
 
 ---
@@ -107,7 +107,7 @@ This automation has been a game-changer, saving both time and money while ensuri
 ---
 
 ### Roadblocks and Solutions
-While setting up AWS Control Tower and managing multi-account environments, I ran into a few hurdles that are pretty common. Here are two of the main challenges I faced and how I tackled them:
+While setting up AWS Control Tower and managing multi-account environments, I ran into a few hurdles. Here are two of the main challenges I faced and how I tackled them:
 
 ### 1. EC2 APIs Not Fully Enabled
 When I tried setting up Control Tower in a new account, it failed because the EC2 APIs weren’t fully enabled. This often happens with new accounts that haven’t completed their verification process.
