@@ -1,5 +1,5 @@
 ---
-title: 'Secure Your Cloud: How AWS Control Tower Transforms Multi-Account Management'
+title: 'How I Boosted AWS Security and Efficiency with Multi-Account Management Using AWS Control Tower'
 date: 2025-03-11
 author: "Bhavika Mantri"
 draft: false
@@ -85,11 +85,45 @@ AWS Access Portal:
 This centralized approach streamlined access management and improved security across my multi-account environment.
 
 ### 6. Automation: Saving Time and Money
-To keep things running smoothly, I deployed a **CloudShell script** that:
-- Monitors **CloudTrail configurations**.
-- Tracks **IAM resource settings** daily across all accounts.
 
-This automation not only saved me time but also helped me understand how to prevent unnecessary expenses.
+![alt text](/images/configreducecosts.png)
+
+To optimize costs and streamline operations, I used a script that automates the configuration of **AWS Config** across all accounts in my AWS environment. The script ensures that AWS Config tracks only **IAM resources** (users, roles, and policies) and updates its recordings **daily**, significantly reducing costs while maintaining essential security monitoring.
+
+Here’s what the script does:
+
+### 1: Assumes the AWSControlTowerExecution Role: 
+It assumes the AWSControlTowerExecution role in all accounts except the management account.
+
+### 2: Updates AWS Config Settings: It configures AWS Config to:
+- Track only IAM resources.
+- Set the recording frequency to daily.
+
+### 3: Reduces Costs: 
+By narrowing the scope and frequency of monitoring, the script minimizes AWS Config costs while still providing critical visibility into IAM changes.
+
+This automation has been a game-changer, saving both time and money while ensuring my multi-account environment remains secure and compliant.
+
+---
+
+### Roadblocks and Solutions
+While setting up AWS Control Tower and managing multi-account environments, I ran into a few hurdles that are pretty common. Here are two of the main challenges I faced and how I tackled them:
+
+### 1. EC2 APIs Not Fully Enabled
+When I tried setting up Control Tower in a new account, it failed because the EC2 APIs weren’t fully enabled. This often happens with new accounts that haven’t completed their verification process.
+
+### What I Did:
+- Launched an EC2 instance (t2.micro) in the same region where I was setting up Control Tower.
+- Let the instance run for 30 minutes to allow AWS to complete the account verification process.
+- Retried the Control Tower setup, which worked this time. Afterward, I terminated the EC2 instance.
+
+### 2. Account Factory Enrollment Failures
+Enrolling accounts into the Account Factory sometimes failed due to issues like incorrect email addresses or hitting service quotas.
+
+### What I Did:
+- Double-checked all email addresses to ensure they were correct and unique.
+- Verified that the required IAM roles were properly configured.
+- Checked for service quota limits (e.g., VPCs, IAM roles) and requested increases where necessary.
 
 ---
 
