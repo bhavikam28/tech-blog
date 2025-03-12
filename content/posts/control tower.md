@@ -44,7 +44,7 @@ AWS Control Tower is more than just a tool—it’s a framework designed to simp
 
 ![alt text](/images/organizations.png)
 
-### 1. Landing Zones: The Foundation of Control Tower
+1. **Landing Zones: The Foundation of Control Tower**
 
 The first step was setting up **Landing Zones**. This created a clean, hierarchical structure for managing accounts. Here’s what I did:
 - Configured dedicated email aliases for the **Log Archive** and **Audit accounts**.
@@ -54,37 +54,37 @@ This structure helped me understand how to manage accounts and ensured clear bou
 
 ![alt text](/images/landingzone.png)
 
-### 2. Organizational Units (OUs): Structuring My Environment
+2. **Organizational Units (OUs): Structuring My Environment**
 I organized the environment into two primary **Organizational Units (OUs)**:
 - **Security OU**: For core accounts like the **Security Account** and **Log Archive Account**.
 - **Sandbox OU**: For **Workload Accounts** like the **Development Account**.
 
 This setup taught me how to ensure proper workload segregation, which is critical for security and compliance.
 
-### 3. Security Controls: Peace of Mind Built-In
+3. **Security Controls: Peace of Mind Built-In**
 One of the standout features of AWS Control Tower is its **built-in security controls**. Here’s what Control Tower automatically set up:
 - **20 Preventive Controls**: These enforce policies across accounts, such as restricting public access to S3 buckets.
 - **3 Detective Controls**: These monitor and identify configuration violations.
 
 These controls gave me peace of mind, knowing that my environment was secure and compliant—without me having to manually configure them.
 
-### 4. Development Account: A Safe Space for Testing
+4. **Development Account: A Safe Space for Testing**
 I created a dedicated **Development Account** within the **Sandbox OU**. This provided an isolated environment for testing and experimentation without compromising security.
 
-### 5. AWS IAM Identity Center: Centralized Access Management
+5. **AWS IAM Identity Center: Centralized Access Management**
 
 ![alt text](/images/awsaccessportal.png)
 
 The AWS IAM Identity Center (formerly AWS Single Sign-On) is a key component of Control Tower. It simplifies identity management and provides a centralized Access Portal for users to securely access AWS accounts and applications. Here’s how I used it:
 
-AWS Access Portal:
+**AWS Access Portal:**
 - Users can log in to the portal and access their assigned AWS accounts and applications.
 - The portal allows filtering accounts by name, ID, or email address, making it easy to manage access across multiple accounts.
 - For example, I assigned roles like **AWSAdministratorAccess** and **AWSOrganizationFullAccess** to specific users, ensuring they had the right level of access.
 
 This centralized approach streamlined access management and improved security across my multi-account environment.
 
-### 6. Automation: Saving Time and Money
+6. **Automation: Saving Time and Money**
 
 ![alt text](/images/configreducecosts.png)
 
@@ -92,14 +92,15 @@ To optimize costs and streamline operations, I used a script that automates the 
 
 Here’s what the script does:
 
-### 1: Assumes the AWSControlTowerExecution Role: 
+1: **Assumes the AWSControlTowerExecution Role**: 
 It assumes the AWSControlTowerExecution role in all accounts except the management account.
 
-### 2: Updates AWS Config Settings: It configures AWS Config to:
+2: **Updates AWS Config Settings**:
+It configures AWS Config to:
 - Track only IAM resources.
 - Set the recording frequency to daily.
 
-### 3: Reduces Costs: 
+3: **Reduces Costs**: 
 By narrowing the scope and frequency of monitoring, the script minimizes AWS Config costs while still providing critical visibility into IAM changes.
 
 This automation has been a game-changer, saving both time and money while ensuring my multi-account environment remains secure and compliant.
@@ -109,18 +110,18 @@ This automation has been a game-changer, saving both time and money while ensuri
 ### Roadblocks and Solutions
 While setting up AWS Control Tower and managing multi-account environments, I ran into a few hurdles. Here are two of the main challenges I faced and how I tackled them:
 
-### 1. EC2 APIs Not Fully Enabled
+1. **EC2 APIs Not Fully Enabled**
 When I tried setting up Control Tower in a new account, it failed because the EC2 APIs weren’t fully enabled. This often happens with new accounts that haven’t completed their verification process.
 
-### What I Did:
+**What I Did:**
 - Launched an EC2 instance (t2.micro) in the same region where I was setting up Control Tower.
 - Let the instance run for 30 minutes to allow AWS to complete the account verification process.
 - Retried the Control Tower setup, which worked this time. Afterward, I terminated the EC2 instance.
 
-### 2. Account Factory Enrollment Failures
+2. **Account Factory Enrollment Failures**
 Enrolling accounts into the Account Factory sometimes failed due to issues like incorrect email addresses or hitting service quotas.
 
-### What I Did:
+**What I Did:**
 - Double-checked all email addresses to ensure they were correct and unique.
 - Verified that the required IAM roles were properly configured.
 - Checked for service quota limits (e.g., VPCs, IAM roles) and requested increases where necessary.
