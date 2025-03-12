@@ -55,6 +55,7 @@ This structure helped me understand how to manage accounts and ensured clear bou
 
 ![alt text](/images/landingzone.png)
 
+---
 
 **2: Organizational Units (OUs): Structuring My Environment**
 I organized the environment into two primary **Organizational Units (OUs)**:
@@ -63,6 +64,7 @@ I organized the environment into two primary **Organizational Units (OUs)**:
 
 This setup taught me how to ensure proper workload segregation, which is critical for security and compliance.
 
+---
 
 **3: Security Controls: Peace of Mind Built-In**
 One of the standout features of AWS Control Tower is its **built-in security controls**. Here’s what Control Tower automatically set up:
@@ -71,10 +73,12 @@ One of the standout features of AWS Control Tower is its **built-in security con
 
 These controls gave me peace of mind, knowing that my environment was secure and compliant—without me having to manually configure them.
 
+---
 
 **4: Development Account: A Safe Space for Testing**
 I created a dedicated **Development Account** within the **Sandbox OU**. This provided an isolated environment for testing and experimentation without compromising security.
 
+---
 
 **5: AWS IAM Identity Center: Centralized Access Management**
 
@@ -89,6 +93,7 @@ The AWS IAM Identity Center (formerly AWS Single Sign-On) is a key component of 
 
 This centralized approach streamlined access management and improved security across my multi-account environment.
 
+---
 
 **6: Automation: Saving Time and Money**
 
@@ -124,6 +129,7 @@ When I tried setting up Control Tower in a new account, it failed because the EC
 - Let the instance run for 30 minutes to allow AWS to complete the account verification process.
 - Retried the Control Tower setup, which worked this time. Afterward, I terminated the EC2 instance.
 
+---
 
 **2: Account Factory Enrollment Failures**
 Enrolling accounts into the Account Factory sometimes failed due to issues like incorrect email addresses or hitting service quotas.
