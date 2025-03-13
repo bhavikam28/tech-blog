@@ -1,5 +1,5 @@
 ---
-title: 'How I Boosted AWS Security and Efficiency with Multi-Account Management Using AWS Control Tower'
+title: 'A Taste of DevOps: Automating My Tech Blog with Terraform, GitHub Actions, and AWS'
 date: 2025-03-13
 author: "Bhavika Mantri"
 draft: false
@@ -10,9 +10,8 @@ categories: ["DevOps"]
 
 # How I Built a Fully Automated, Secure, and Scalable Tech Blog Using Terraform, GitHub Actions, and AWS
 
-![Tech Blog Architecture](static/images/techblog.png)
+![alt text](/images/tasteofdevops/techblog.png)
 
-## Workflow Overview
 
 Building a tech blog is more than just writing content — it’s about creating a platform that’s secure, scalable, and easy to maintain. When I started this project, I wanted to build something that could grow with me without requiring constant manual updates. In this post, I’ll walk you through my journey of building a fully automated tech blog using DevOps tools like **GitHub Actions**, **Terraform**, and **AWS**, complete with all the hiccups, “aha!” moments, and lessons learned along the way. Whether you’re a beginner, this guide will help you create a robust blogging platform that’s both efficient and secure.
 
