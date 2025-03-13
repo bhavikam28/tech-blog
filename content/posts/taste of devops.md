@@ -8,15 +8,21 @@ categories: ["DevOps"]
 description: "Learn how I built a fully automated, secure, and scalable tech blog using Terraform, GitHub Actions, and AWS."
 ---
 
+> **Learn how I built a fully automated, secure, and scalable tech blog using Terraform, GitHub Actions, and AWS**
+
+---
+
 ![alt text](/images/tasteofdevops/techblog.png)
+
+---
 
 Building a tech blog is more than just writing content — it’s about creating a platform that’s **secure**, **scalable**, and **easy to maintain**. When I started this project, I wanted to build something that could grow with me without requiring constant manual updates. In this post, I’ll walk you through my journey of building a fully automated tech blog using DevOps tools like **GitHub Actions**, **Terraform**, and **AWS**, complete with all the hiccups, “aha!” moments, and lessons learned along the way. Whether you’re a beginner or an experienced developer, this guide will help you create a robust blogging platform that’s both efficient and secure.
 
 ---
 
-## Step 1: Serving a Static Website on AWS with CloudFront and S3
+# Step 1: Serving a Static Website on AWS with CloudFront and S3
 
-### Why AWS S3 and CloudFront?
+## Why AWS S3 and CloudFront?
 
 To host my blog, I used **AWS S3** for storage and **Amazon CloudFront** as a Content Delivery Network (CDN). This combination ensures that my blog is:
 
@@ -31,46 +37,45 @@ To enhance security, I implemented **Origin Access Control (OAC)** for the S3 bu
 
 ---
 
-## Step 2: Automating the Workflow with GitHub Actions
+# Step 2: Automating the Workflow with GitHub Actions
 
 The GitHub Actions workflow is triggered whenever I push code to GitHub. It consists of three key jobs:
 
 1. **Provision AWS Infrastructure (Infra_job)**:
-   - This job uses **Terraform** to provision the AWS infrastructure, including the S3 bucket and CloudFront distribution.
-   - It leverages **HashiCorp Cloud Platform (HCP)** as the remote backend for Terraform, ensuring secure state management and collaboration.
+   - This job uses **Terraform** to provision the AWS infrastructure, including the S3 bucket and CloudFront distribution. It leverages **HashiCorp Cloud Platform (HCP)** as the remote backend for Terraform, ensuring secure state management and collaboration.
+   - **OIDC Integration Between Terraform Cloud and AWS**: To securely authenticate with AWS, I set up OIDC integration between Terraform Cloud and AWS. This allows Terraform to assume an IAM role without hardcoding credentials, enhancing security. I created a dedicated IAM role for Terraform with the necessary permissions to provision and manage AWS resources.
+
+   ---
 
 2. **Build the Blog with Hugo (build_job)**:
    - This job installs **Hugo**, builds the static site, and uploads the generated files as build artifacts.
-   - **Why Hugo?**: I chose Hugo, a fast and flexible static site generator, because it made it easy to build a high-performance blog that integrates seamlessly with my automated deployment pipeline.
+   > **Why Hugo?**: I chose Hugo, a fast and flexible static site generator, because it made it easy to build a high-performance blog that integrates seamlessly with my automated deployment pipeline.
+
+   ---
 
 3. **Deploy the Blog to S3 and Invalidate CloudFront Cache (deploy_job)**:
    - This job syncs the built artifacts to the S3 bucket and invalidates the CloudFront cache to ensure visitors see the latest content.
-
-### OIDC Integration Between GitHub and AWS
-
-For GitHub Actions, I configured **OIDC integration** with AWS to allow GitHub workflows to securely assume an IAM role. This role has permissions limited to syncing files to S3 and invalidating the CloudFront cache. By using OIDC, I eliminated the need for hardcoded credentials, making the setup more secure and scalable.
+   - **OIDC Integration Between GitHub and AWS**: For GitHub Actions, I configured **OIDC integration** with AWS to allow GitHub workflows to securely assume an IAM role. This role has permissions limited to syncing files to S3 and invalidating the CloudFront cache. By using OIDC, I eliminated the need for hardcoded credentials, making the setup more secure and scalable.
 
 ![alt text](/images/tasteofdevops/oidc.png)
 
-> **Think of OIDC as a secure handshake between GitHub and AWS, allowing GitHub Actions to temporarily access your AWS resources without storing permanent credentials.**
+   > Think of OIDC as a secure handshake between GitHub and AWS, allowing GitHub Actions to temporarily access your AWS resources without storing permanent credentials.
 
 ---
 
-## Step 3: Managing Infrastructure with Terraform
+# Step 3: Managing Infrastructure with Terraform
 
-### Organizing Terraform Code
+## Organizing Terraform Code
 
 To manage my infrastructure code effectively, I organized it into multiple `.tf` files, each serving a specific purpose. Here’s how I structured the files:
 
 ![alt text](/images/tasteofdevops/terraformfilestructure.png)
 
-### Why Terraform?
-
-Terraform enables **Infrastructure as Code (IaC)**, automating the provisioning of AWS resources like S3, CloudFront, and ACM. It ensures **consistency**, **scalability**, and **collaboration** while reducing manual effort and errors.
+> **Why Terraform?** Terraform enables **Infrastructure as Code (IaC)**, automating the provisioning of AWS resources like S3, CloudFront, and ACM. It ensures **consistency**, **scalability**, and **collaboration** while reducing manual effort and errors.
 
 ---
 
-## Step 4: Enhancing Security and Performance
+# Step 4: Enhancing Security and Performance
 
 1. **Securing the Blog with AWS ACM**:
    - I used **AWS Certificate Manager (ACM)** to provision an SSL/TLS certificate for my custom domain. This enabled **HTTPS**, encrypting all traffic between users and the blog.
@@ -83,27 +88,47 @@ Terraform enables **Infrastructure as Code (IaC)**, automating the provisioning 
 
 ---
 
-## Step 5: Environment Variables and Secrets
+# Step 5: Environment Variables and Secrets
 
 To ensure a secure and seamless integration between Terraform, GitHub Actions, and AWS, I configured several environment variables and secrets.
 
-### Why These Variables and Secrets Matter
+## Why These Variables and Secrets Matter
 
 - **Security**: Sensitive information like IAM role ARNs and API tokens are stored as secrets, ensuring they are never exposed in plaintext.
 - **Flexibility**: Environment variables like `AWS_REGION` allow for easy configuration changes without modifying code.
 - **Automation**: By using OIDC and role assumptions, I eliminated the need for hardcoded credentials, making the setup more secure and scalable.
 
-![alt text](/images/tasteofdevops/githubsecrets.png)
-
-![alt text](/images/tasteofdevops/githubvalues.png)
+1. **Terraform Workspace Variables**
+In the Terraform Cloud workspace, I set the following environment variables to manage authentication, region, and role assumptions:
 
 ![alt text](/images/tasteofdevops/terraformvariables.png)
 
 ![alt text](/images/tasteofdevops/terraformvalues.png)
 
+
+2. **GitHub Repository Secrets**
+In the GitHub repository, I stored the following secrets to securely authenticate and interact with AWS and Terraform Cloud:
+
+![alt text](/images/tasteofdevops/githubsecrets.png)
+
+![alt text](/images/tasteofdevops/githubvalues.png)
+
+
 ---
 
-## Challenges and Lessons Learned
+> **Successful completion of the GitHub workflow will create the following resources on the HCP Terraform:**
+
+![alt text](/images/tasteofdevops/terraformrun.png)
+
+---
+
+> **The workflow summary below shows the successful completion of all jobs under ‘Actions’ in GitHub:**
+
+![alt text](/images/tasteofdevops/githubvaluesgithubrun.png)
+
+---
+
+# Challenges and Lessons Learned
 
 While the combination of Terraform, GitHub Actions, and AWS made the process more manageable, I encountered several challenges along the way. Here are the key lessons I learned:
 
@@ -118,7 +143,8 @@ While the combination of Terraform, GitHub Actions, and AWS made the process mor
      git filter-branch -f --index-filter 'git rm --cached -r --ignore-unmatch .terraform/'
      git push --force
      ```
-   - **Pro Tip**: Add `.terraform/` to your `.gitignore` file to avoid this issue in the future.
+   
+   > **Pro Tip**: Add `.terraform/` to your `.gitignore` file to avoid this issue in the future. This ensures that the .terraform directory (which contains provider binaries and other local state files) is never tracked by Git.
 
 2. **Incorrect OIDC Setup**:
    - When setting up OIDC integration between GitHub and AWS, I initially configured the wrong thumbprint for the GitHub OIDC provider. This caused authentication failures, and GitHub Actions couldn’t assume the IAM role. The issue was resolved after double-checking the thumbprint and reconfiguring the OIDC provider.
@@ -131,7 +157,7 @@ While the combination of Terraform, GitHub Actions, and AWS made the process mor
 
 ---
 
-## Conclusion
+# Conclusion
 
 Building a secure, automated tech blog using **Hugo**, **GitHub Actions**, **Terraform**, and **AWS** has been an incredibly rewarding journey. From streamlining deployments with Terraform to ensuring robust security with OIDC and IAM policies, this project taught me the power of combining the right tools to create a scalable and efficient platform.
 
