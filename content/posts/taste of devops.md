@@ -1,6 +1,6 @@
 ---
 title: 'How I Boosted AWS Security and Efficiency with Multi-Account Management Using AWS Control Tower'
-date: 2025-03-113
+date: 2025-03-13
 author: "Bhavika Mantri"
 draft: false
 tags: ["AWS", "AWS Security", "DevOps", "GitHub Actions", "Terraform"]
