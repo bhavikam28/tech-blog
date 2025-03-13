@@ -5,15 +5,12 @@ author: "Bhavika Mantri"
 draft: false
 tags: ["AWS", "AWS Security", "DevOps", "GitHub Actions", "Terraform"]
 categories: ["DevOps"]
-
+description: "Learn how I built a fully automated, secure, and scalable tech blog using Terraform, GitHub Actions, and AWS."
 ---
-
-# How I Built a Fully Automated, Secure, and Scalable Tech Blog Using Terraform, GitHub Actions, and AWS
 
 ![alt text](/images/tasteofdevops/techblog.png)
 
-
-Building a tech blog is more than just writing content — it’s about creating a platform that’s secure, scalable, and easy to maintain. When I started this project, I wanted to build something that could grow with me without requiring constant manual updates. In this post, I’ll walk you through my journey of building a fully automated tech blog using DevOps tools like **GitHub Actions**, **Terraform**, and **AWS**, complete with all the hiccups, “aha!” moments, and lessons learned along the way. Whether you’re a beginner, this guide will help you create a robust blogging platform that’s both efficient and secure.
+Building a tech blog is more than just writing content — it’s about creating a platform that’s **secure**, **scalable**, and **easy to maintain**. When I started this project, I wanted to build something that could grow with me without requiring constant manual updates. In this post, I’ll walk you through my journey of building a fully automated tech blog using DevOps tools like **GitHub Actions**, **Terraform**, and **AWS**, complete with all the hiccups, “aha!” moments, and lessons learned along the way. Whether you’re a beginner or an experienced developer, this guide will help you create a robust blogging platform that’s both efficient and secure.
 
 ---
 
@@ -21,9 +18,16 @@ Building a tech blog is more than just writing content — it’s about creating
 
 ### Why AWS S3 and CloudFront?
 
-To host my blog, I used **AWS S3** for storage and **Amazon CloudFront** as a Content Delivery Network (CDN). This combination ensures that my blog is **scalable**, **cost-effective**, and delivers content quickly to users worldwide.
+To host my blog, I used **AWS S3** for storage and **Amazon CloudFront** as a Content Delivery Network (CDN). This combination ensures that my blog is:
 
-To enhance security, I implemented **Origin Access Control (OAC)** for the S3 bucket. OAC ensures that the S3 bucket can only be accessed via the CloudFront distribution, preventing direct access to the S3 bucket. This setup not only secures the content but also improves performance by leveraging CloudFront’s global edge network.
+- **Scalable**: Easily handle traffic spikes.
+- **Cost-Effective**: Pay only for the storage and bandwidth you use.
+- **Fast Content Delivery**: Serve content quickly to users worldwide.
+
+To enhance security, I implemented **Origin Access Control (OAC)** for the S3 bucket. OAC ensures that the S3 bucket can only be accessed via the CloudFront distribution, preventing direct access to the S3 bucket. This setup:
+
+- **Secures Content**: Protects your data from unauthorized access.
+- **Improves Performance**: Leverages CloudFront’s global edge network for faster delivery.
 
 ---
 
@@ -46,7 +50,7 @@ The GitHub Actions workflow is triggered whenever I push code to GitHub. It cons
 
 For GitHub Actions, I configured **OIDC integration** with AWS to allow GitHub workflows to securely assume an IAM role. This role has permissions limited to syncing files to S3 and invalidating the CloudFront cache. By using OIDC, I eliminated the need for hardcoded credentials, making the setup more secure and scalable.
 
-![OIDC Integration](static/images/oide.png)
+![alt text](/images/tasteofdevops/oidc.png)
 
 > **Think of OIDC as a secure handshake between GitHub and AWS, allowing GitHub Actions to temporarily access your AWS resources without storing permanent credentials.**
 
@@ -58,8 +62,7 @@ For GitHub Actions, I configured **OIDC integration** with AWS to allow GitHub w
 
 To manage my infrastructure code effectively, I organized it into multiple `.tf` files, each serving a specific purpose. Here’s how I structured the files:
 
-![Terraform File Structure](static/images/terraformfilestructure.png)
-
+![alt text](/images/tasteofdevops/terraformfilestructure.png)
 
 ### Why Terraform?
 
@@ -90,9 +93,13 @@ To ensure a secure and seamless integration between Terraform, GitHub Actions, a
 - **Flexibility**: Environment variables like `AWS_REGION` allow for easy configuration changes without modifying code.
 - **Automation**: By using OIDC and role assumptions, I eliminated the need for hardcoded credentials, making the setup more secure and scalable.
 
-![GitHub Secrets](static/images/githubsecrets.png)
+![alt text](/images/tasteofdevops/githubsecrets.png)
 
-![Terraform Variables](static/images/terraformvariables.png)
+![alt text](/images/tasteofdevops/githubvalues.png)
+
+![alt text](/images/tasteofdevops/terraformvariables.png)
+
+![alt text](/images/tasteofdevops/terraformvalues.png)
 
 ---
 
@@ -129,8 +136,6 @@ While the combination of Terraform, GitHub Actions, and AWS made the process mor
 Building a secure, automated tech blog using **Hugo**, **GitHub Actions**, **Terraform**, and **AWS** has been an incredibly rewarding journey. From streamlining deployments with Terraform to ensuring robust security with OIDC and IAM policies, this project taught me the power of combining the right tools to create a scalable and efficient platform.
 
 If you’re looking to build a similar setup, I hope this guide has provided you with valuable insights and practical solutions to common challenges. Whether you’re a beginner or an experienced developer, the combination of these tools can help you create a blog that’s not only secure and performant but also easy to maintain.
-
-**Got questions or need help?** Feel free to reach out to me on [LinkedIn](https://www.linkedin.com/in/your-profile) or leave a comment below. I’d love to hear about your experiences and help you on your DevOps journey!
 
 ---
 
