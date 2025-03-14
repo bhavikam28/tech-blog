@@ -8,11 +8,13 @@ categories: ["DevOps"]
 description: "Learn how I built a fully automated, secure, and scalable tech blog using Terraform, GitHub Actions, and AWS."
 ---
 
-> **Learn how I built a fully automated, secure, and scalable tech blog using Terraform, GitHub Actions, and AWS**
 
 ---
 
-![alt text](/images/tasteofdevops/techblog.png)
+<figure>
+  <img src="/images/tasteofdevops/techblog.png" alt="Workflow Summary" />
+  <figcaption><strong>Workflow Summary</strong>: A visual representation of the automated workflow using Terraform, GitHub Actions, and AWS.</figcaption>
+</figure>
 
 ---
 
@@ -22,7 +24,7 @@ Building a tech blog is more than just writing content — it’s about creating
 
 # Step 1: Serving a Static Website on AWS with CloudFront and S3
 
-## Why AWS S3 and CloudFront?
+### Why AWS S3 and CloudFront?
 
 To host my blog, I used **AWS S3** for storage and **Amazon CloudFront** as a Content Delivery Network (CDN). This combination ensures that my blog is:
 
@@ -65,7 +67,7 @@ The GitHub Actions workflow is triggered whenever I push code to GitHub. It cons
 
 # Step 3: Managing Infrastructure with Terraform
 
-## Organizing Terraform Code
+### Organizing Terraform Code
 
 To manage my infrastructure code effectively, I organized it into multiple `.tf` files, each serving a specific purpose. Here’s how I structured the files:
 
@@ -92,7 +94,7 @@ To manage my infrastructure code effectively, I organized it into multiple `.tf`
 
 To ensure a secure and seamless integration between Terraform, GitHub Actions, and AWS, I configured several environment variables and secrets.
 
-## Why These Variables and Secrets Matter
+### Why These Variables and Secrets Matter
 
 - **Security**: Sensitive information like IAM role ARNs and API tokens are stored as secrets, ensuring they are never exposed in plaintext.
 - **Flexibility**: Environment variables like `AWS_REGION` allow for easy configuration changes without modifying code.
@@ -103,6 +105,7 @@ In the Terraform Cloud workspace, I set the following environment variables to m
 
 ![alt text](/images/tasteofdevops/terraformvariables.png)
 
+
 ![alt text](/images/tasteofdevops/terraformvalues.png)
 
 
@@ -110,6 +113,7 @@ In the Terraform Cloud workspace, I set the following environment variables to m
 In the GitHub repository, I stored the following secrets to securely authenticate and interact with AWS and Terraform Cloud:
 
 ![alt text](/images/tasteofdevops/githubsecrets.png)
+
 
 ![alt text](/images/tasteofdevops/githubvalues.png)
 
@@ -134,11 +138,15 @@ While the combination of Terraform, GitHub Actions, and AWS made the process mor
 
 1. **Terraform File Size Exceeding GitHub Limits**:
    - When pushing the Terraform code to GitHub, I encountered an error due to the size of the `.terraform` directory, specifically the provider binaries. The error message looked like this:
+
      ```
      remote: error: File .terraform/providers/registry.terraform.io/hashicorp/aws/4.52.0/windows_amd64/terraform-provider-aws_v4.52.0_x5.exe is 326.16 MB; this exceeds GitHub's file size limit of 100.00 MB
      ```
-   - **Terraform file size limits? Yeah, GitHub wasn’t too happy about that one — and neither was I!**
+   
+> **Terraform file size limits? Yeah, GitHub wasn’t too happy about that one — and neither was I!**
+   
    - **Solution**:
+
      ```bash
      git filter-branch -f --index-filter 'git rm --cached -r --ignore-unmatch .terraform/'
      git push --force
@@ -146,11 +154,14 @@ While the combination of Terraform, GitHub Actions, and AWS made the process mor
    
    > **Pro Tip**: Add `.terraform/` to your `.gitignore` file to avoid this issue in the future. This ensures that the .terraform directory (which contains provider binaries and other local state files) is never tracked by Git.
 
+
 2. **Incorrect OIDC Setup**:
    - When setting up OIDC integration between GitHub and AWS, I initially configured the wrong thumbprint for the GitHub OIDC provider. This caused authentication failures, and GitHub Actions couldn’t assume the IAM role. The issue was resolved after double-checking the thumbprint and reconfiguring the OIDC provider.
 
+
 3. **Terraform AWS Role ARN Issue**:
    - While setting up OIDC integration between AWS and Terraform Cloud, I encountered an error when running `terraform plan`. After some troubleshooting, I realized that the correct environment variable for the IAM Role ARN is `TFC_AWS_RUN_ROLE_ARN`, not `AWS_ROLE_ARN`. This small but critical detail resolved the issue.
+
 
 4. **Incorrect IAM Policy Permissions**:
    - I initially created an IAM policy that was too restrictive, which caused the GitHub Actions workflow to fail when trying to sync files to S3. After reviewing the AWS error logs, I updated the policy to include the necessary permissions (`s3:PutObject`, `s3:ListBucket`, and `cloudfront:CreateInvalidation`), and the workflow ran successfully.
@@ -165,7 +176,7 @@ If you’re looking to build a similar setup, I hope this guide has provided you
 
 ---
 
-## Relevant Links
+# Relevant Links
 
 Here are some useful links to help you better understand the tools and concepts discussed in this blog:
 
