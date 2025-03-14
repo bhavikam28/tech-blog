@@ -59,12 +59,14 @@ The GitHub Actions workflow is triggered whenever I push code to GitHub. It cons
    - This job syncs the built artifacts to the S3 bucket and invalidates the CloudFront cache to ensure visitors see the latest content.
    - **OIDC Integration Between GitHub and AWS**: For GitHub Actions, I configured **OIDC integration** with AWS to allow GitHub workflows to securely assume an IAM role. This role has permissions limited to syncing files to S3 and invalidating the CloudFront cache. By using OIDC, I eliminated the need for hardcoded credentials, making the setup more secure and scalable.
 
+---
 
 <div style="text-align: center;">
   <img src="/images/tasteofdevops/oidc.png" alt="OIDC Integrations" />
   <p><em>OIDC Integrations</em></p>
 </div>
 
+---
 
    > Think of OIDC as a secure handshake between GitHub and AWS, allowing GitHub Actions to temporarily access your AWS resources without storing permanent credentials.
 
@@ -76,10 +78,13 @@ The GitHub Actions workflow is triggered whenever I push code to GitHub. It cons
 
 To manage my infrastructure code effectively, I organized it into multiple `.tf` files, each serving a specific purpose. Here’s how I structured the files:
 
+---
 <div style="text-align: center;">
-  <img src="/images/tasteofdevops/terraform.png" alt="Terraform File Structure" />
+  <img src="/images/tasteofdevops/terraformfilestructure.png" alt="Terraform File Structure" />
   <p><em>Terraform File Structure</em></p>
 </div>
+
+---
 
 > **Why Terraform?** Terraform enables **Infrastructure as Code (IaC)**, automating the provisioning of AWS resources like S3, CloudFront, and ACM. It ensures **consistency**, **scalability**, and **collaboration** while reducing manual effort and errors.
 
@@ -111,44 +116,56 @@ To ensure a secure and seamless integration between Terraform, GitHub Actions, a
 1. **Terraform Workspace Variables**
 In the Terraform Cloud workspace, I set the following environment variables to manage authentication, region, and role assumptions:
 
+---
+
 <div style="text-align: center;">
   <img src="/images/tasteofdevops/terraformvariables.png" alt="Terraform Workspace Variables: Description" />
   <p><em>Terraform Workspace Variables: Description</em></p>
 </div>
 
+---
 
 <div style="text-align: center;">
   <img src="/images/tasteofdevops/terraformvalues.png" alt="Terraform Workspace Variables" />
   <p><em>Terraform Workspace Variables</em></p>
 </div>
 
+---
 
 2. **GitHub Repository Secrets**
 In the GitHub repository, I stored the following secrets to securely authenticate and interact with AWS and Terraform Cloud:
+
+---
 
 <div style="text-align: center;">
   <img src="/images/tasteofdevops/githubsecrets.png" alt="GitHub Repository Secrets: Description" />
   <p><em>GitHub Repository Secrets: Description</em></p>
 </div>
 
+---
 
 <div style="text-align: center;">
   <img src="/images/tasteofdevops/githubvalues.png" alt="GitHub Repository Secrets" />
   <p><em>GitHub Repository Secrets</em></p>
 </div>
 
+---
 
 ---
 
 > **Successful completion of the GitHub workflow will create the following resources on the HCP Terraform**
 
+---
+
 ![alt text](/images/tasteofdevops/terraformrun.png)
 
 ---
 
-> **The workflow summary below shows the successful completion of all jobs under ‘Actions’ in GitHub:*
+> **The workflow summary below shows the successful completion of all jobs under ‘Actions’ in GitHub:**
 
-![alt text](/images/tasteofdevops/githubvaluesrun.png)
+---
+
+![alt text](/images/tasteofdevops/githubrun.png)
 
 ---
 
@@ -163,7 +180,7 @@ While the combination of Terraform, GitHub Actions, and AWS made the process mor
      remote: error: File .terraform/providers/registry.terraform.io/hashicorp/aws/4.52.0/windows_amd64/terraform-provider-aws_v4.52.0_x5.exe is 326.16 MB; this exceeds GitHub's file size limit of 100.00 MB
      ```
    
-> **Terraform file size limits? Yeah, GitHub wasn’t too happy about that one — and neither was I!**
+    *Terraform file size limits? Yeah, GitHub wasn’t too happy about that one — and neither was I!*
    
    - **Solution**:
 
@@ -184,13 +201,13 @@ While the combination of Terraform, GitHub Actions, and AWS made the process mor
 
 
 4. **Incorrect IAM Policy Permissions**:
-   - I initially created an IAM policy that was too restrictive, which caused the GitHub Actions workflow to fail when trying to sync files to S3. After reviewing the AWS error logs, I updated the policy to include the necessary permissions (`s3:PutObject`, `s3:ListBucket`, and `cloudfront:CreateInvalidation`), and the workflow ran successfully.
+   - I initially created an IAM policy that was too restrictive, which caused the GitHub Actions workflow to fail when trying to sync files to S3. After reviewing the AWS error logs, I updated the policy to include the necessary permissions and the workflow ran successfully.
 
 ---
 
 ### Conclusion
 
-Building a secure, automated tech blog using **Hugo**, **GitHub Actions**, **Terraform**, and **AWS** has been an incredibly rewarding journey. From streamlining deployments with Terraform to ensuring robust security with OIDC and IAM policies, this project taught me the power of combining the right tools to create a scalable and efficient platform.
+Building a secure, automated tech blog using Hugo, GitHub Actions, Terraform, and AWS has been an incredibly rewarding journey. From streamlining deployments with Terraform to ensuring robust security with OIDC and IAM policies, this project taught me the power of combining the right tools to create a scalable and efficient platform.
 
 If you’re looking to build a similar setup, I hope this guide has provided you with valuable insights and practical solutions to common challenges. Whether you’re a beginner or an experienced developer, the combination of these tools can help you create a blog that’s not only secure and performant but also easy to maintain.
 
