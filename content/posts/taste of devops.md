@@ -18,7 +18,7 @@ description: "Learn how I built a fully automated, secure, and scalable tech blo
 
 ---
 
-Building a tech blog is more than just writing content — it’s about creating a platform that’s **secure**, **scalable**, and **easy to maintain**. When I started this project, I wanted to build something that could grow with me without requiring constant manual updates. In this post, I’ll walk you through my journey of building a fully automated tech blog using DevOps tools like **GitHub Actions**, **Terraform**, and **AWS**, complete with all the hiccups, “aha!” moments, and lessons learned along the way. Whether you’re a beginner or an experienced developer, this guide will help you create a robust blogging platform that’s both efficient and secure.
+Building a tech blog is more than just writing content — it’s about creating a platform that’s secure, scalable, and easy to maintain. When I started this project, I wanted to build something that could grow with me without requiring constant manual updates. In this post, I’ll walk you through my journey of building a fully automated tech blog using DevOps tools like GitHub Actions, Terraform, and AWS, complete with all the hiccups, “aha!” moments, and lessons learned along the way. Whether you’re a beginner or an experienced developer, this guide will help you create a robust blogging platform that’s both efficient and secure.
 
 ---
 
@@ -26,11 +26,13 @@ Building a tech blog is more than just writing content — it’s about creating
 
 **Why AWS S3 and CloudFront?**
 
-To host my blog, I used **AWS S3** for storage and **Amazon CloudFront** as a Content Delivery Network (CDN). This combination ensures that my blog is:
+To host my blog, I used AWS S3 for storage and Amazon CloudFront as a Content Delivery Network (CDN). This combination ensures that my blog is:
 
 - **Scalable**: Easily handle traffic spikes.
 - **Cost-Effective**: Pay only for the storage and bandwidth you use.
 - **Fast Content Delivery**: Serve content quickly to users worldwide.
+
+---
 
 To enhance security, I implemented **Origin Access Control (OAC)** for the S3 bucket. OAC ensures that the S3 bucket can only be accessed via the CloudFront distribution, preventing direct access to the S3 bucket. This setup:
 
@@ -50,14 +52,14 @@ The GitHub Actions workflow is triggered whenever I push code to GitHub. It cons
    ---
 
 2. **Build the Blog with Hugo (build_job)**:
-   - This job installs **Hugo**, builds the static site, and uploads the generated files as build artifacts.
+   - This job installs Hugo, builds the static site, and uploads the generated files as build artifacts.
    > **Why Hugo?**: I chose Hugo, a fast and flexible static site generator, because it made it easy to build a high-performance blog that integrates seamlessly with my automated deployment pipeline.
 
    ---
 
 3. **Deploy the Blog to S3 and Invalidate CloudFront Cache (deploy_job)**:
    - This job syncs the built artifacts to the S3 bucket and invalidates the CloudFront cache to ensure visitors see the latest content.
-   - **OIDC Integration Between GitHub and AWS**: For GitHub Actions, I configured **OIDC integration** with AWS to allow GitHub workflows to securely assume an IAM role. This role has permissions limited to syncing files to S3 and invalidating the CloudFront cache. By using OIDC, I eliminated the need for hardcoded credentials, making the setup more secure and scalable.
+   - **OIDC Integration Between GitHub and AWS**: For GitHub Actions, I configured OIDC integration with AWS to allow GitHub workflows to securely assume an IAM role. This role has permissions limited to syncing files to S3 and invalidating the CloudFront cache. By using OIDC, I eliminated the need for hardcoded credentials, making the setup more secure and scalable.
 
 ---
 
@@ -86,20 +88,22 @@ To manage my infrastructure code effectively, I organized it into multiple `.tf`
 
 ---
 
-> **Why Terraform?** Terraform enables **Infrastructure as Code (IaC)**, automating the provisioning of AWS resources like S3, CloudFront, and ACM. It ensures **consistency**, **scalability**, and **collaboration** while reducing manual effort and errors.
+> **Why Terraform?** Terraform enables **Infrastructure as Code (IaC)**, automating the provisioning of AWS resources like S3, CloudFront, and ACM. It ensures consistency, scalability, and collaboration while reducing manual effort and errors.
 
 ---
 
 ### Step 4: Enhancing Security and Performance
 
 1. **Securing the Blog with AWS ACM**:
-   - I used **AWS Certificate Manager (ACM)** to provision an SSL/TLS certificate for my custom domain. This enabled **HTTPS**, encrypting all traffic between users and the blog.
+   - I used AWS Certificate Manager (ACM) to provision an SSL/TLS certificate for my custom domain. This enabled HTTPS, encrypting all traffic between users and the blog.
+
+   ---
 
 2. **Restricting Access with IAM Policies**:
-   - I implemented fine-grained **IAM policies** for both GitHub Actions and Terraform. These policies ensure that:
+   - I implemented fine-grained IAM policies for both GitHub Actions and Terraform. These policies ensure that:
      - GitHub Actions can only sync files to S3 and invalidate the CloudFront cache.
      - Terraform has the minimum permissions required to provision and manage AWS resources.
-   - By using **Role-Based Access Control (RBAC)** and **OIDC integration**, I eliminated the need for hardcoded credentials, reducing the risk of accidental exposure or misuse.
+   - By using Role-Based Access Control (RBAC) and OIDC integration, I eliminated the need for hardcoded credentials, reducing the risk of accidental exposure or misuse.
 
 ---
 
@@ -107,11 +111,15 @@ To manage my infrastructure code effectively, I organized it into multiple `.tf`
 
 To ensure a secure and seamless integration between Terraform, GitHub Actions, and AWS, I configured several environment variables and secrets.
 
+---
+
 **Why These Variables and Secrets Matter**
 
 - **Security**: Sensitive information like IAM role ARNs and API tokens are stored as secrets, ensuring they are never exposed in plaintext.
 - **Flexibility**: Environment variables like `AWS_REGION` allow for easy configuration changes without modifying code.
 - **Automation**: By using OIDC and role assumptions, I eliminated the need for hardcoded credentials, making the setup more secure and scalable.
+
+---
 
 1. **Terraform Workspace Variables**
 In the Terraform Cloud workspace, I set the following environment variables to manage authentication, region, and role assumptions:
@@ -179,8 +187,9 @@ While the combination of Terraform, GitHub Actions, and AWS made the process mor
      ```
      remote: error: File .terraform/providers/registry.terraform.io/hashicorp/aws/4.52.0/windows_amd64/terraform-provider-aws_v4.52.0_x5.exe is 326.16 MB; this exceeds GitHub's file size limit of 100.00 MB
      ```
-   
+   ---
     *Terraform file size limits? Yeah, GitHub wasn’t too happy about that one — and neither was I!*
+    ---
    
    - **Solution**:
 
@@ -191,14 +200,17 @@ While the combination of Terraform, GitHub Actions, and AWS made the process mor
    
    > **Pro Tip**: Add `.terraform/` to your `.gitignore` file to avoid this issue in the future. This ensures that the .terraform directory (which contains provider binaries and other local state files) is never tracked by Git.
 
+---
 
 2. **Incorrect OIDC Setup**:
    - When setting up OIDC integration between GitHub and AWS, I initially configured the wrong thumbprint for the GitHub OIDC provider. This caused authentication failures, and GitHub Actions couldn’t assume the IAM role. The issue was resolved after double-checking the thumbprint and reconfiguring the OIDC provider.
 
+---
 
 3. **Terraform AWS Role ARN Issue**:
    - While setting up OIDC integration between AWS and Terraform Cloud, I encountered an error when running `terraform plan`. After some troubleshooting, I realized that the correct environment variable for the IAM Role ARN is `TFC_AWS_RUN_ROLE_ARN`, not `AWS_ROLE_ARN`. This small but critical detail resolved the issue.
 
+---
 
 4. **Incorrect IAM Policy Permissions**:
    - I initially created an IAM policy that was too restrictive, which caused the GitHub Actions workflow to fail when trying to sync files to S3. After reviewing the AWS error logs, I updated the policy to include the necessary permissions and the workflow ran successfully.
