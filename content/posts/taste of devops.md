@@ -1,6 +1,6 @@
 ---
 title: 'A Taste of DevOps: Automating My Tech Blog with Terraform, GitHub Actions, and AWS'
-date: 2025-03-13
+date: 2025-03-14
 author: "Bhavika Mantri"
 draft: false
 tags: ["AWS", "AWS Security", "DevOps", "GitHub Actions", "Terraform"]
