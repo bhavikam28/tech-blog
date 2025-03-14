@@ -11,8 +11,10 @@ description: "Learn how I built a fully automated, secure, and scalable tech blo
 
 ---
 
-![Automated Workflow](/images/tasteofdevops/techblog.png)  
-*A visual representation of the automated workflow using Terraform, GitHub Actions, and AWS.*
+<div style="text-align: center;">
+  <img src="/images/tasteofdevops/techblog.png" alt="Automated Workflow" />
+  <p><em>A visual representation of the automated workflow using Terraform, GitHub Actions, and AWS.</em></p>
+</div>
 
 ---
 
@@ -57,8 +59,12 @@ The GitHub Actions workflow is triggered whenever I push code to GitHub. It cons
    - This job syncs the built artifacts to the S3 bucket and invalidates the CloudFront cache to ensure visitors see the latest content.
    - **OIDC Integration Between GitHub and AWS**: For GitHub Actions, I configured **OIDC integration** with AWS to allow GitHub workflows to securely assume an IAM role. This role has permissions limited to syncing files to S3 and invalidating the CloudFront cache. By using OIDC, I eliminated the need for hardcoded credentials, making the setup more secure and scalable.
 
-![Automated Workflow](/images/tasteofdevops/oidc.png)
-*OIDC Integrations*
+
+<div style="text-align: center;">
+  <img src="/images/tasteofdevops/oidc.png" alt="OIDC Integrations" />
+  <p><em>OIDC Integrations</em></p>
+</div>
+
 
    > Think of OIDC as a secure handshake between GitHub and AWS, allowing GitHub Actions to temporarily access your AWS resources without storing permanent credentials.
 
@@ -70,7 +76,10 @@ The GitHub Actions workflow is triggered whenever I push code to GitHub. It cons
 
 To manage my infrastructure code effectively, I organized it into multiple `.tf` files, each serving a specific purpose. Here’s how I structured the files:
 
-![alt text](/images/tasteofdevops/terraformfilestructure.png)
+<div style="text-align: center;">
+  <img src="/images/tasteofdevops/terraform.png" alt="Terraform File Structure" />
+  <p><em>Terraform File Structure</em></p>
+</div>
 
 > **Why Terraform?** Terraform enables **Infrastructure as Code (IaC)**, automating the provisioning of AWS resources like S3, CloudFront, and ACM. It ensures **consistency**, **scalability**, and **collaboration** while reducing manual effort and errors.
 
@@ -102,32 +111,44 @@ To ensure a secure and seamless integration between Terraform, GitHub Actions, a
 1. **Terraform Workspace Variables**
 In the Terraform Cloud workspace, I set the following environment variables to manage authentication, region, and role assumptions:
 
-![alt text](/images/tasteofdevops/terraformvariables.png)
+<div style="text-align: center;">
+  <img src="/images/tasteofdevops/terraformvariables.png" alt="Terraform Workspace Variables: Description" />
+  <p><em>Terraform Workspace Variables: Description</em></p>
+</div>
 
 
-![alt text](/images/tasteofdevops/terraformvalues.png)
+<div style="text-align: center;">
+  <img src="/images/tasteofdevops/terraformvalues.png" alt="Terraform Workspace Variables" />
+  <p><em>Terraform Workspace Variables</em></p>
+</div>
 
 
 2. **GitHub Repository Secrets**
 In the GitHub repository, I stored the following secrets to securely authenticate and interact with AWS and Terraform Cloud:
 
-![alt text](/images/tasteofdevops/githubsecrets.png)
+<div style="text-align: center;">
+  <img src="/images/tasteofdevops/githubsecrets.png" alt="GitHub Repository Secrets: Description" />
+  <p><em>GitHub Repository Secrets: Description</em></p>
+</div>
 
 
-![alt text](/images/tasteofdevops/githubvalues.png)
+<div style="text-align: center;">
+  <img src="/images/tasteofdevops/githubvalues.png" alt="GitHub Repository Secrets" />
+  <p><em>GitHub Repository Secrets</em></p>
+</div>
 
 
 ---
 
-> **Successful completion of the GitHub workflow will create the following resources on the HCP Terraform:**
+> **Successful completion of the GitHub workflow will create the following resources on the HCP Terraform**
 
 ![alt text](/images/tasteofdevops/terraformrun.png)
 
 ---
 
-> **The workflow summary below shows the successful completion of all jobs under ‘Actions’ in GitHub:**
+> **The workflow summary below shows the successful completion of all jobs under ‘Actions’ in GitHub:*
 
-![alt text](/images/tasteofdevops/githubvaluesgithubrun.png)
+![alt text](/images/tasteofdevops/githubvaluesrun.png)
 
 ---
 
