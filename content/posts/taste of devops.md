@@ -11,10 +11,8 @@ description: "Learn how I built a fully automated, secure, and scalable tech blo
 
 ---
 
-<figure>
-  <img src="/images/tasteofdevops/techblog.png" alt="Workflow Summary" />
-  <figcaption><strong>Workflow Summary</strong>: A visual representation of the automated workflow using Terraform, GitHub Actions, and AWS.</figcaption>
-</figure>
+![Automated Workflow](/images/tasteofdevops/techblog.png)  
+*A visual representation of the automated workflow using Terraform, GitHub Actions, and AWS.*
 
 ---
 
@@ -22,9 +20,9 @@ Building a tech blog is more than just writing content — it’s about creating
 
 ---
 
-# Step 1: Serving a Static Website on AWS with CloudFront and S3
+### Step 1: Serving a Static Website on AWS with CloudFront and S3
 
-### Why AWS S3 and CloudFront?
+**Why AWS S3 and CloudFront?**
 
 To host my blog, I used **AWS S3** for storage and **Amazon CloudFront** as a Content Delivery Network (CDN). This combination ensures that my blog is:
 
@@ -39,7 +37,7 @@ To enhance security, I implemented **Origin Access Control (OAC)** for the S3 bu
 
 ---
 
-# Step 2: Automating the Workflow with GitHub Actions
+### Step 2: Automating the Workflow with GitHub Actions
 
 The GitHub Actions workflow is triggered whenever I push code to GitHub. It consists of three key jobs:
 
@@ -59,15 +57,16 @@ The GitHub Actions workflow is triggered whenever I push code to GitHub. It cons
    - This job syncs the built artifacts to the S3 bucket and invalidates the CloudFront cache to ensure visitors see the latest content.
    - **OIDC Integration Between GitHub and AWS**: For GitHub Actions, I configured **OIDC integration** with AWS to allow GitHub workflows to securely assume an IAM role. This role has permissions limited to syncing files to S3 and invalidating the CloudFront cache. By using OIDC, I eliminated the need for hardcoded credentials, making the setup more secure and scalable.
 
-![alt text](/images/tasteofdevops/oidc.png)
+![Automated Workflow](/images/tasteofdevops/oidc.png)
+*OIDC Integrations*
 
    > Think of OIDC as a secure handshake between GitHub and AWS, allowing GitHub Actions to temporarily access your AWS resources without storing permanent credentials.
 
 ---
 
-# Step 3: Managing Infrastructure with Terraform
+### Step 3: Managing Infrastructure with Terraform
 
-### Organizing Terraform Code
+**Organizing Terraform Code**
 
 To manage my infrastructure code effectively, I organized it into multiple `.tf` files, each serving a specific purpose. Here’s how I structured the files:
 
@@ -77,7 +76,7 @@ To manage my infrastructure code effectively, I organized it into multiple `.tf`
 
 ---
 
-# Step 4: Enhancing Security and Performance
+### Step 4: Enhancing Security and Performance
 
 1. **Securing the Blog with AWS ACM**:
    - I used **AWS Certificate Manager (ACM)** to provision an SSL/TLS certificate for my custom domain. This enabled **HTTPS**, encrypting all traffic between users and the blog.
@@ -90,11 +89,11 @@ To manage my infrastructure code effectively, I organized it into multiple `.tf`
 
 ---
 
-# Step 5: Environment Variables and Secrets
+### Step 5: Environment Variables and Secrets
 
 To ensure a secure and seamless integration between Terraform, GitHub Actions, and AWS, I configured several environment variables and secrets.
 
-### Why These Variables and Secrets Matter
+**Why These Variables and Secrets Matter**
 
 - **Security**: Sensitive information like IAM role ARNs and API tokens are stored as secrets, ensuring they are never exposed in plaintext.
 - **Flexibility**: Environment variables like `AWS_REGION` allow for easy configuration changes without modifying code.
@@ -132,7 +131,7 @@ In the GitHub repository, I stored the following secrets to securely authenticat
 
 ---
 
-# Challenges and Lessons Learned
+### Challenges and Lessons Learned
 
 While the combination of Terraform, GitHub Actions, and AWS made the process more manageable, I encountered several challenges along the way. Here are the key lessons I learned:
 
@@ -168,7 +167,7 @@ While the combination of Terraform, GitHub Actions, and AWS made the process mor
 
 ---
 
-# Conclusion
+### Conclusion
 
 Building a secure, automated tech blog using **Hugo**, **GitHub Actions**, **Terraform**, and **AWS** has been an incredibly rewarding journey. From streamlining deployments with Terraform to ensuring robust security with OIDC and IAM policies, this project taught me the power of combining the right tools to create a scalable and efficient platform.
 
@@ -176,7 +175,7 @@ If you’re looking to build a similar setup, I hope this guide has provided you
 
 ---
 
-# Relevant Links
+### Relevant Links
 
 Here are some useful links to help you better understand the tools and concepts discussed in this blog:
 
