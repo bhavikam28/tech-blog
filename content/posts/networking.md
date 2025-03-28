@@ -21,13 +21,15 @@ In the ever-evolving world of cloud computing, networking isn’t just a technic
 - **Controlled Sharing**: Enabling seamless collaboration across teams and accounts without compromising security.
 - **Operational Efficiency**: Streamlining resource management across multiple accounts to reduce complexity and costs.
 
+---
+
 These challenges aren’t just theoretical — they’re real hurdles that can make or break a cloud deployment. A well-designed network architecture can mean the difference between a secure, scalable environment and one plagued by vulnerabilities or inefficiencies. This guide dives into how I tackled these issues by implementing AWS Virtual Private Cloud (VPC) and Resource Access Manager (RAM), following the **AWS Security Reference Architecture (SRA)** best practices.
 
 Drawing from the AWS SRA, the approach centers on creating a **dedicated Network account** to centralize networking resources, which can then be securely shared with other accounts using RAM. This not only enhances security but also promotes collaboration and cost efficiency. To add more perspective, I’ve incorporated insights from related discussions on networking in AWS, such as the importance of isolating resources in private subnets and the role of automation in deployment workflows. Whether you’re managing a small setup or preparing for a large-scale deployment, this guide provides a blueprint for building a robust AWS network foundation. Let’s get started!
 
 ---
 
-## Core Architectural Components:
+### Core Architectural Components
 
 # 1. Virtual Private Cloud (VPC): Your Cloud Fortress
 A VPC acts as a private, isolated network within AWS’s public cloud, offering a secure environment for your resources. Think of it as a private hotel within a bustling city: it has public areas (subnets) for external access and private rooms (subnets) for sensitive operations. A VPC provides:
@@ -77,7 +79,7 @@ The configuration shares the VPC subnets with the “Sandbox” OU, ensuring tha
 
 ---
 
-## Step-by-Step Implementation:
+### Step-by-Step Implementation
 
 # Phase 1: Establishing the Network Foundation
 The AWS SRA emphasizes the importance of a dedicated Network account to centralize networking resources across an organization. This approach simplifies management, whether you’re handling a handful of accounts or hundreds. Here’s how I set it up:
@@ -215,7 +217,7 @@ The Network account hosts the VPC, but other accounts — like a Development acc
 
 ---
 
-## Security and Operational Benefits
+### Security and Operational Benefits
 This implementation delivers several advantages:
 
 - **Enhanced Security**: Private subnets isolate critical resources, while security groups act as virtual firewalls to control traffic. The NAT Gateway ensures outbound-only internet access for private subnets.
@@ -225,19 +227,19 @@ This implementation delivers several advantages:
 
 ---
 
-## Additional Insights
+### Additional Insights
 While working on this project, I came across some valuable insights that added depth to my approach. One key takeaway was the analogy of a VPC as a private hotel: public subnets act like a lobby with controlled access to the outside world, while private subnets are like secure rooms for sensitive operations. This perspective helped me better understand the importance of isolating resources and using gateways like the NAT Gateway as controlled access points.
 
 ---
 
-## Conclusion
+### Conclusion
 This implementation provides a secure, scalable foundation for AWS networking. By combining a dedicated Network account, Infrastructure as Code with Terraform, automated CI/CD pipelines via GitHub Actions, and secure resource sharing with RAM, I’ve created a setup that balances security, efficiency, and flexibility.
 
 I hope this documentation was helpful, and thank you for reading!
 
 ---
 
-## Resources
+### Resources
 - [AWS Security Reference Architecture](https://docs.aws.amazon.com/prescriptive-guidance/latest/security-reference-architecture/network.html)
 - [Amazon Virtual Private Cloud (VPC) Documentation](https://docs.aws.amazon.com/vpc/)
 - [AWS RAM User Guide](https://aws.amazon.com/ram/)
