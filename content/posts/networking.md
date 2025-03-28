@@ -27,9 +27,9 @@ Drawing from the AWS SRA, the approach centers on creating a **dedicated Network
 
 ---
 
-### Core Architectural Components:
+## Core Architectural Components:
 
-## 1. Virtual Private Cloud (VPC): Your Cloud Fortress
+# 1. Virtual Private Cloud (VPC): Your Cloud Fortress
 A VPC acts as a private, isolated network within AWS’s public cloud, offering a secure environment for your resources. Think of it as a private hotel within a bustling city: it has public areas (subnets) for external access and private rooms (subnets) for sensitive operations. A VPC provides:
 
 - Logical isolation of network segments.
@@ -57,7 +57,7 @@ This setup ensures that business-critical applications, like databases or intern
 
 ---
 
-## 2. Resource Access Manager (RAM): The Secure Sharing Mechanism
+# 2. Resource Access Manager (RAM): The Secure Sharing Mechanism
 RAM is a powerful tool for sharing resources across AWS accounts without duplicating them. It’s like a secure channel between departments in an organization, allowing controlled access to shared resources. RAM offers:
 
 - Elimination of resource duplication.
@@ -77,9 +77,9 @@ The configuration shares the VPC subnets with the “Sandbox” OU, ensuring tha
 
 ---
 
-### Step-by-Step Implementation:
+## Step-by-Step Implementation:
 
-## Phase 1: Establishing the Network Foundation
+# Phase 1: Establishing the Network Foundation
 The AWS SRA emphasizes the importance of a dedicated Network account to centralize networking resources across an organization. This approach simplifies management, whether you’re handling a handful of accounts or hundreds. Here’s how I set it up:
 
 1. **Created an “Infrastructure” OU**: 
@@ -116,7 +116,7 @@ I ran a CloudShell script in the Management account to reduce AWS Config expense
 
 ---
 
-## Phase 2: Building the VPC with Terraform
+# Phase 2: Building the VPC with Terraform
 A VPC is essential for running services like EC2 or RDS, so I built one from scratch with the following components:
 
 - **2 Public Subnets**: For resources that need internet access, like load balancers.
@@ -128,7 +128,7 @@ The Terraform code deployed this VPC in us-east-1. I stored the code in a GitHub
 
 ---
 
-## Phase 3: Automating with GitHub Actions
+# Phase 3: Automating with GitHub Actions
 Automation is key to maintaining consistency and reducing human error in deployments. I set up a CI/CD pipeline using GitHub Actions to deploy the VPC:
 
 - **Trigger**: Pushes to the main branch or pull requests.
@@ -186,7 +186,7 @@ To enable secure access, I integrated GitHub Actions with AWS using OpenID Conne
 
 ---
 
-## Phase 4: Cross-Account Sharing with RAM
+# Phase 4: Cross-Account Sharing with RAM
 The Network account hosts the VPC, but other accounts — like a Development account — need to use it. AWS RAM makes this possible by securely sharing resources across accounts. Here’s how I implemented it:
 
 1. **Enabled Sharing**: In the Management account, activated RAM sharing with AWS Organizations.
@@ -215,7 +215,7 @@ The Network account hosts the VPC, but other accounts — like a Development acc
 
 ---
 
-### Security and Operational Benefits
+## Security and Operational Benefits
 This implementation delivers several advantages:
 
 - **Enhanced Security**: Private subnets isolate critical resources, while security groups act as virtual firewalls to control traffic. The NAT Gateway ensures outbound-only internet access for private subnets.
@@ -225,19 +225,19 @@ This implementation delivers several advantages:
 
 ---
 
-### Additional Insights
+## Additional Insights
 While working on this project, I came across some valuable insights that added depth to my approach. One key takeaway was the analogy of a VPC as a private hotel: public subnets act like a lobby with controlled access to the outside world, while private subnets are like secure rooms for sensitive operations. This perspective helped me better understand the importance of isolating resources and using gateways like the NAT Gateway as controlled access points.
 
 ---
 
-### Conclusion
+## Conclusion
 This implementation provides a secure, scalable foundation for AWS networking. By combining a dedicated Network account, Infrastructure as Code with Terraform, automated CI/CD pipelines via GitHub Actions, and secure resource sharing with RAM, I’ve created a setup that balances security, efficiency, and flexibility.
 
 I hope this documentation was helpful, and thank you for reading!
 
 ---
 
-### Resources
+## Resources
 - [AWS Security Reference Architecture](https://docs.aws.amazon.com/prescriptive-guidance/latest/security-reference-architecture/network.html)
 - [Amazon Virtual Private Cloud (VPC) Documentation](https://docs.aws.amazon.com/vpc/)
 - [AWS RAM User Guide](https://aws.amazon.com/ram/)
