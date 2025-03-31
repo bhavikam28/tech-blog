@@ -27,9 +27,11 @@ The application is built using a modern tech stack:
 
 
 ---
+
 <div style="text-align: center;">
   <img src="/images/mvp/applicationoverview.png" alt="Application Architecture Overview" />
 </div>
+
 ---
 
 This comprehensive guide documents my journey through four crucial phases of infrastructure automation:
@@ -46,19 +48,23 @@ This comprehensive guide documents my journey through four crucial phases of inf
 The infrastructure automation follows two streamlined CI/CD workflows:
 
 ---
+
 <div style="text-align: center;">
   <img src="/images/mvp/implementation.png" alt="Implementation Architecture" />
 </div>
+
 ---
 
-**1. AMI Creation with Packer:**
+- **AMI Creation with Packer:**
 This workflow builds an immutable Amazon Machine Image from a base Ubuntu image using a BASH provisioning script. The script automates the installation of all dependencies (including Python, Nginx, and PostgreSQL) and configures the runtime environment for our Django application. Triggered by GitHub releases, each AMI is versioned to match the release tag (e.g., v1.0.0), ensuring traceability and consistency.
 
-**2. EC2 Deployment with Terraform:**
+- **EC2 Deployment with Terraform:**
 Once the AMI is available, a separate workflow deploys EC2 instances using Terraform. The process is designed for reliability: instances launch with the pre-configured AMI, eliminating post-deployment setup steps. Manual triggers via workflow_dispatch allow controlled rollouts of specific AMI versions.
 
-**Why Packer?**
-Immutable infrastructure is key to reducing configuration drift. By baking everything into the AMI — dependencies, application code, and even secrets — we ensure instances are production-ready upon launch. This approach also speeds up scaling; new instances inherit the same battle-tested environment without manual intervention.
+---
+
+   **Why Packer?**
+    Immutable infrastructure is key to reducing configuration drift. By baking everything into the AMI — dependencies, application code, and even secrets — we ensure instances are production-ready upon launch. This approach also speeds up scaling; new instances inherit the same battle-tested environment without manual intervention.
 
 ---
 
@@ -87,6 +93,7 @@ I created a custom Amazon Machine Image (AMI) using HashiCorp Packer to ensure c
 
 - Used the amazon-ami-management post-processor to retain only the last two AMI releases, reducing storage costs.
 
+---
 
 ```hcl
 
@@ -206,6 +213,8 @@ build {
 - Created a workflow to trigger Packer builds on new GitHub releases.
 -  Injected sensitive credentials (SECRET_KEY, DB_USER, DB_PASSWORD) dynamically using a secrets.sh file.
 
+---
+
 ```yaml
 name: Packer Build on Release
 
@@ -262,15 +271,17 @@ jobs:
 
 ```
 
+---
+
 🚀**Outcome:**
 - Successfully generated a custom AMI with application files and configurations.
 - Established an automated, versioned, and cost-efficient AMI creation process.
 ---
+
 <
 <div style="text-align: center;">
   <img src="/images/mvp/ami.png" alt="AMI Created" />
 </div>
-
 
 ---
 
@@ -297,6 +308,7 @@ Once the AMI was ready, the next step was to launch an EC2 instance based on it.
 - Used OIDC integration to authenticate Terraform with AWS.
 - Configured manual triggers using workflow_dispatch to deploy specific AMI versions.
 
+---
 
 ```yaml
 
@@ -353,7 +365,8 @@ jobs:
         run: |
           echo "Public IP: $(terraform output instance_public_ip | tr -d '""')"
 ```
-   
+---
+
 🚀 **Outcome:**
 EC2 instance was launched successfully with version-controlled AMIs.
 
@@ -378,6 +391,8 @@ Since we aimed for a secure infrastructure, I configured AWS SSM for remote acce
 
 - Used AWS Console Session Manager to establish a shell session.
 - Ensured no additional inbound SSH ports were required.
+
+---
 
 🚀 **Outcome:**
 Secure, agent-based access to the instance without SSH, enhancing security.
@@ -406,13 +421,15 @@ To ensure a fully automated deployment process, I developed a Bash script (setup
 - **PostgreSQL:** Provides a robust relational database backend.
 - **Python Virtual Environment:** Isolates dependencies and maintains a clean environment for the application.
 
-The script automates:
+**The script automates:**
 
 - Installing essential dependencies (Nginx, Gunicorn, PostgreSQL, and Python packages).
 - Setting up a Python virtual environment and installing application dependencies from requirements.txt.
 - Configuring Gunicorn as a systemd service to ensure application persistence.
 - Deploying an Nginx configuration that proxies traffic to the Gunicorn service.
 - Enabling firewall rules to allow HTTP traffic and secure database access.
+
+---
 
 🚀 **Outcome:** 
 The new AMI was now fully configured out-of-the-box, reducing setup time for future deployments.
