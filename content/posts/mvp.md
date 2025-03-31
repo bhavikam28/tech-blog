@@ -26,11 +26,11 @@ The application is built using a modern tech stack:
 - **PostgreSQL**: A reliable, scalable database for storing authenticated user data
 
 
-<!-- Application Overview -->
+---
 <div style="text-align: center;">
-  <img src="/static/images/mvp/applicationoverview.png" alt="Application Architecture Overview" />
+  <img src="/images/mvp/applicationoverview.png" alt="Application Architecture Overview" />
 </div>
-
+---
 
 This comprehensive guide documents my journey through four crucial phases of infrastructure automation:
 
@@ -45,10 +45,11 @@ This comprehensive guide documents my journey through four crucial phases of inf
 
 The infrastructure automation follows two streamlined CI/CD workflows:
 
-<!-- Implementation -->
+---
 <div style="text-align: center;">
-  <img src="/static/images/mvp/implementation.png" alt="Implementation Architecture" />
+  <img src="/images/mvp/implementation.png" alt="Implementation Architecture" />
 </div>
+---
 
 **1. AMI Creation with Packer:**
 This workflow builds an immutable Amazon Machine Image from a base Ubuntu image using a BASH provisioning script. The script automates the installation of all dependencies (including Python, Nginx, and PostgreSQL) and configures the runtime environment for our Django application. Triggered by GitHub releases, each AMI is versioned to match the release tag (e.g., v1.0.0), ensuring traceability and consistency.
@@ -264,10 +265,10 @@ jobs:
 🚀**Outcome:**
 - Successfully generated a custom AMI with application files and configurations.
 - Established an automated, versioned, and cost-efficient AMI creation process.
-
-<!-- AMI Creation -->
+---
+<
 <div style="text-align: center;">
-  <img src="/static/images/mvp/ami.png" alt="AMI Creation Process" />
+  <img src="/images/mvp/ami.png" alt="AMI Created" />
 </div>
 
 
@@ -356,9 +357,8 @@ jobs:
 🚀 **Outcome:**
 EC2 instance was launched successfully with version-controlled AMIs.
 
-<!-- EC2 Deployment -->
 <div style="text-align: center;">
-  <img src="/static/images/mvp/ec2.png" alt="EC2 Deployment Diagram" />
+  <img src="/images/mvp/ec2.png" alt="EC2 Deployed" />
 </div>
 
 ---
@@ -382,15 +382,14 @@ Since we aimed for a secure infrastructure, I configured AWS SSM for remote acce
 🚀 **Outcome:**
 Secure, agent-based access to the instance without SSH, enhancing security.
 
-<!-- AMI Creation -->
 <div style="text-align: center;">
-  <img src="/static/images/mvp/ami.png" alt="AMI Creation Process" />
+  <img src="/images/mvp/ami.png" alt="AMI Created" />
 </div>
 
 ---
-<!-- GitHub AMI Workflow -->
+
 <div style="text-align: center;">
-  <img src="/static/images/mvp/githubami.png" alt="GitHub AMI Build Workflow" />
+  <img src="/images/mvp/githubami.png" alt="GitHub AMI Build Workflow Results" />
 </div>
 
 ---
@@ -401,11 +400,11 @@ To ensure a fully automated deployment process, I developed a Bash script (setup
 
 **Key Components of the Setup:**
 
-**Django Framework:** Serves as the backbone of the application.
-**Gunicorn:** Handles WSGI requests efficiently for the Django application.
-**Nginx:** Acts as a reverse proxy to route requests to Gunicorn.
-**PostgreSQL:** Provides a robust relational database backend.
-**Python Virtual Environment:** Isolates dependencies and maintains a clean environment for the application.
+- **Django Framework:** Serves as the backbone of the application.
+- **Gunicorn:** Handles WSGI requests efficiently for the Django application.
+- **Nginx:** Acts as a reverse proxy to route requests to Gunicorn.
+- **PostgreSQL:** Provides a robust relational database backend.
+- **Python Virtual Environment:** Isolates dependencies and maintains a clean environment for the application.
 
 The script automates:
 
@@ -426,9 +425,8 @@ With everything set up, I deployed the final AMI version and verified the applic
 
 ✅ Application is successfully running at **http://INSTANCE_PUBLIC_IP** 🎉
 
-<!-- Final Test -->
 <div style="text-align: center;">
-  <img src="/static/images/mvp/finaltest.png" alt="Final Application Test Results" />
+  <img src="/images/mvp/finaltest.png" alt="Final Application Test Results" />
 </div>
 
 ---
