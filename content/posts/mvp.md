@@ -369,6 +369,7 @@ jobs:
 🚀 **Outcome:**
 EC2 instance was launched successfully with version-controlled AMIs.
 
+
 <div style="text-align: center;">
   <img src="/images/mvp/ec2.png" alt="EC2 Deployed" />
 </div>
@@ -396,14 +397,9 @@ Since we aimed for a secure infrastructure, I configured AWS SSM for remote acce
 🚀 **Outcome:**
 Secure, agent-based access to the instance without SSH, enhancing security.
 
-<div style="text-align: center;">
-  <img src="/images/mvp/ami.png" alt="AMI Created" />
-</div>
-
----
 
 <div style="text-align: center;">
-  <img src="/images/mvp/githubami.png" alt="GitHub AMI Build Workflow Results" />
+  <img src="/images/mvp/ssm.png" alt="EC2 connected via SSM" />
 </div>
 
 ---
@@ -432,6 +428,18 @@ To ensure a fully automated deployment process, I developed a Bash script (setup
 
 🚀 **Outcome:** 
 The new AMI was now fully configured out-of-the-box, reducing setup time for future deployments.
+
+---
+
+<div style="text-align: center;">
+  <img src="/images/mvp/ami.png" alt="AMI Created" />
+</div>
+
+---
+
+<div style="text-align: center;">
+  <img src="/images/mvp/githubami.png" alt="GitHub AMI Build Workflow Results" />
+</div>
 
 ---
 
