@@ -278,7 +278,6 @@ jobs:
 - Established an automated, versioned, and cost-efficient AMI creation process.
 ---
 
-<
 <div style="text-align: center;">
   <img src="/images/mvp/ami.png" alt="AMI Created" />
 </div>
