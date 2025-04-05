@@ -256,7 +256,7 @@ DATABASES = {
 2. Enabled Origin Access Control to ensure only CloudFront can access S3.
 
 <div style="text-align: center;">
-  <img src="/images/mvp/oac.png" alt="Origin Access Control" />
+  <img src="/images/managedservices/oac.png" alt="Origin Access Control" />
 </div>
 
 ---
