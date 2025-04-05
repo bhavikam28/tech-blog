@@ -44,19 +44,27 @@ Let’s dive into the details!
 The initial MVP was built for speed, but scaling requires a more robust foundation. Here’s why the old setup wouldn’t work long-term:
 
 **1. More Users, More Problems**
+
 **Then:** A single EC2 instance handled everything (app, database, storage).
+
 **Now:** Traffic spikes? Database queries slowing down? RDS decouples the database, allowing independent scaling.
 
 **2. Data Everywhere, Consistency Nowhere**
+
 **Then:** User uploads lived on one server — impossible to share across multiple instances.
+
 **Now:** S3 acts as a single source of truth for images, accessible globally via CloudFront.
 
 **3. Security & Maintenance Headaches**
+
 **Then:** Secrets baked into AMIs. Changing a password? Redeploy everything.
+
 **Now:** SSM Parameter Store securely manages configurations, enabling zero-downtime updates.
 
-4. Cost Efficiency at Scale**
+**4. Cost Efficiency at Scale**
+
 **Then:** Over-provisioned EBS volumes “just in case”.
+
 **Now:** Pay only for what you use with S3, and optimize database costs separately.
 
 **The Bottom Line:**
@@ -298,6 +306,7 @@ aws s3 cp /opt/app/media/user_image/ s3://my-bucket/media/user_image/ - recursiv
 ---
 
 ### Part 4: Deploying the New Application Version
+
 With the new infrastructure in place, I deployed an updated version of the application:
 
 1. Replaced the application code with the new version from the provided zip file.
@@ -313,11 +322,16 @@ With the new infrastructure in place, I deployed an updated version of the appli
 ### Challenges & Solutions
 
 **1. Server Error (500) During User Signup**
+
 *Problem:* The application returned 500 errors when new users attempted to sign up.
+
 *Root Cause:*
+
 - Missing auth_user table in the database
 - Incorrect database credentials in settings.py
+
 *Solution:*
+
 - Updated the DATABASES configuration in settings.py to use the correct credentials.
 - Ran Django migrations to create the auth_user table and restarted Gunicorn and Nginx.
 
@@ -330,8 +344,11 @@ sudo systemctl restart nginx
 ```
 
 **2. Critical File Location Issues**
+
 *Problem:* Django management commands failed due to missing manage.py.
+
 *Root Cause:* Incorrect project structure deployment.
+
 *Solution:* Reorganized files to proper locations:
 
 ```bash
@@ -347,8 +364,11 @@ sudo systemctl restart nginx
 ```
 
 **3. Database Migration Hurdles**
+
 *Problem:* DMS replication tasks failed to connect.
+
 *Root Cause:* PostgreSQL security restrictions in pg_hba.conf.
+
 *Solution:* Edited the pg_hba.conf file to allow connections from the DMS replication instance IP (10.10.10.215):
 
 ```conf
@@ -358,9 +378,13 @@ sudo systemctl restart postgresql
 ```
 
 **4. Data Migration Failures**
+
 *Problem:* DMS tasks showed 100% completion but ended in error state.
+
 *Root Cause:* Schema incompatibilities and unsupported data types.
+
 *Solution:*
+
 - Created premigration assessment report
 - Modified problematic tables and data types
 - Restarted migration task after fixes
@@ -377,9 +401,8 @@ Connection issues between services should be identified before migration.
 3. Leverage AWS Assessment Tools
 Premigration assessments revealed critical schema issues that would have caused data loss.
 
-4. Maintain Operational Checks
+4. Maintain Operational Checks through regular verification of:
 
-Regular verification of:
 - Virtual environment activation
 - Service status (PostgreSQL, Gunicorn, Nginx)
 - File permissions
