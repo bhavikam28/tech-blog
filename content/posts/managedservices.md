@@ -1,12 +1,19 @@
 ---
-title: 'Launching MVP with Automated Infrastructure: Packer AMIs, Terraform & AWS SSM'
-date: 2025-03-31
+title: 'From EC2 to AWS Managed Services: Migrating to AWS RDS with DMS'
+date: 2025-04-05
 author: "Bhavika Mantri"
 draft: false
-tags: ["AWS", "AWS Security", "DevOps", "Packer", "AWS SSM"]
+tags: ["AWS", "DevOps", "AWS RDS", "AWS DMS", "AWS Parameter Store"]
 categories: ["DevOps"]
 
 ---
+
+<div style="text-align: center;">
+  <img src="/images/managedservices/intro.png" alt="" />
+</div>
+
+---
+
 
 ### Introduction
 
@@ -15,11 +22,20 @@ Last week, I successfully deployed an MVP using a simple but effective setup —
 This week, I undertook a major infrastructure upgrade to ensure the platform remains fast, reliable, and cost-efficient as I scale by:
 
 ✅ Migrated the database from EC2 to Amazon RDS using AWS DMS
+
 ✅ Moved image storage to S3 with CloudFront for global delivery
+
 ✅ Secured configurations using SSM Parameter Store
+
 ✅ Updated the app to leverage these AWS services seamlessly
 
+
 Let’s dive into the details!
+
+<div style="text-align: center;">
+  <img src="/images/managedservices/architecture.png" alt="Architecture Overview" />
+</div>
+
 
 ---
 
@@ -73,7 +89,11 @@ I used AWS Database Migration Service (DMS) because it enables:
 - Private subnet placement for security
 - Custom parameter group to disable forced SSL (for DMS compatibility)
 
+<div style="text-align: center;">
+  <img src="/images/managedservices/mvp.png" alt="RDS Database" />
+</div>
 
+---
 
 ```terraform
 
@@ -110,9 +130,27 @@ resource "aws_db_parameter_group" "mvp" {
 2. Configured AWS Database Migration Service (DMS) with Terraform
 
 - Created a replication instance (dms.t3.micro)
+
+<div style="text-align: center;">
+  <img src="/images/managedservices/replicationinstance.png" alt="DMS Replication Instance" />
+</div>
+
+---
+
 - Defined source (EC2) and target (RDS) endpoints
+<div style="text-align: center;">
+  <img src="/images/managedservices/endpoints.png" alt="DMS Endpoints" />
+</div>
+
+---
+
 - Ran a full-load replication task to migrate data
 
+<div style="text-align: center;">
+  <img src="/images/managedservices/dmstask.png" alt="DMS Replication Task" />
+</div>
+
+---
 
 ```terraform
 
@@ -196,7 +234,24 @@ DATABASES = {
 **Implementation Steps:**
 1. Created an S3 Bucket and a CloudFront Distribution using Terraform.
 
+<div style="text-align: center;">
+  <img src="/images/managedservices/s3 bucket.png" alt="S3 Bucket" />
+</div>
+
+---
+
+<div style="text-align: center;">
+  <img src="/images/managedservices/cfd.png" alt="CloudFront Distribution" />
+</div>
+
+---
 2. Enabled Origin Access Control to ensure only CloudFront can access S3.
+
+<div style="text-align: center;">
+  <img src="/images/mvp/oac.png" alt="Origin Access Control" />
+</div>
+
+---
 
 3. Updated EC2 IAM Role to grant permission for S3 operations (put, get, delete, list).
 
@@ -227,6 +282,12 @@ aws s3 cp /opt/app/media/user_image/ s3://my-bucket/media/user_image/ - recursiv
 - /cloudtalents/startup/database_endpoint
 - /cloudtalents/startup/image_storage_bucket_name
 - /cloudtalents/startup/image_storage_cloudfront_domain
+
+<div style="text-align: center;">
+  <img src="/images/managedservices/parameterstore.png" alt="Parameter Store" />
+</div>
+
+---
 
 2. Updated EC2 Instance Profile to allow reading these parameters.
 
@@ -273,15 +334,17 @@ sudo systemctl restart nginx
 *Root Cause:* Incorrect project structure deployment.
 *Solution:* Reorganized files to proper locations:
 
+```bash
 /opt/app/
 ├── cloudtalents/
-│ ├── _init__.py
-│ ├── settings.py
-│ ├── urls.py
-│ └── wsgi.py
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
 ├── manage.py
 ├── requirements.txt
 └── venv/
+```
 
 **3. Database Migration Hurdles**
 *Problem:* DMS replication tasks failed to connect.
@@ -328,8 +391,11 @@ Regular verification of:
 By making these improvements, the MVP is now more scalable, cost-effective, and secure:
 
 ✅ Database on Amazon RDS — No more data loss or performance bottlenecks.
+
 ✅ Images stored in Amazon S3 and served via CloudFront — Faster and cheaper image delivery.
+
 ✅ Configurations managed in SSM Parameter Store — Enhanced security and scalability.
+
 ✅ Updated application deployment pipeline — More streamlined and automated.
 
 This upgrade ensures that the MVP is well-prepared for growth while keeping costs under control. Exciting times ahead! 🚀
