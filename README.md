@@ -21,7 +21,8 @@ Welcome to the repository powering [**TechNest by Bhavika**](https://technestbyb
 
 ## 📸 Architecture Overview
 
-![Tech Blog DevOps Pipeline](./956d0f15-3513-4c6b-92bc-8c516a7fd798.png)
+<img width="1536" height="596" alt="image" src="https://github.com/user-attachments/assets/98bbfcef-ae9f-4ee7-b6c8-02e2729272de" />
+
 
 This architecture supports a secure and automated blog deployment pipeline:
 
