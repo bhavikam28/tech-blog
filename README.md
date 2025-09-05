@@ -74,49 +74,55 @@ hugo server -D
 
 Visit: http://localhost:1313
 
-Configuration
+## 🔧 Configuration
 
-Edit hugo.toml:
+Visit your site locally at: [http://localhost:1313](http://localhost:1313)
 
-Set baseURL = "https://technestbybhavika.com"
+Open the `hugo.toml` file and update the following:
 
-Update author name, social links, and profile image URL
+- `baseURL = "https://technestbybhavika.com"`
+- Author name
+- Social links (LinkedIn, GitHub, Medium, etc.)
+- Profile image URL
 
-Build & Deploy
+---
 
-Deployment is fully automated via GitHub Actions.
+## 📦 Build & Deploy
 
-GitHub Workflow Overview
+Deployment is fully automated using **GitHub Actions**.
 
-infra_job: Provisions infrastructure (S3, CloudFront, IAM roles, ACM)
+### GitHub Workflow Overview
 
-build_job: Builds the static blog site with Hugo
+- **`infra_job`** – Provisions infrastructure (S3, CloudFront, IAM roles, ACM)
+- **`build_job`** – Builds the static blog using Hugo
+- **`deploy_job`** – Uploads files to S3 and invalidates CloudFront cache
 
-deploy_job: Uploads files to S3 and invalidates CloudFront cache
+> 🔐 OIDC is used for secure role assumption without hardcoded secrets.
 
-OIDC is used for secure role assumption without hardcoded secrets.
+📖 [Read the full write-up on Medium](https://medium.com/@bhavi.28.mantri/a-taste-of-devops-automating-my-tech-blog-with-terraform-github-actions-and-aws-93f46a33662f)
 
-More details in the full write-up on Medium
-.
+---
 
-Published Blog Posts
+## ✍️ Published Blog Posts
 
 Published directly via this platform:
 
-AWS Managed Services: Real-World DevOps Use Cases
+- [**AWS Managed Services: Real-World DevOps Use Cases**](https://technestbybhavika.com/managedservices/)
+- [**Auto-Scaling MVP Architecture on AWS**](https://technestbybhavika.com/mvp/)
+- [**VPC Networking Deep Dive**](https://technestbybhavika.com/networking/)
 
-Auto-Scaling MVP Architecture on AWS
+---
 
-VPC Networking Deep Dive
+## 📚 About
 
-About
+This project is part of my portfolio from the **Cloud Talents AWS DevOps Bootcamp**, designed to showcase real-world **IaC**, **CI/CD**, and **AWS security** integrations using **Terraform** and **GitHub Actions**.
 
-This project is part of my portfolio from the Cloud Talents AWS DevOps Bootcamp, designed to showcase real-world IaC, CI/CD, and AWS security integrations using Terraform and GitHub.
+- 🔗 **Website**: [technestbybhavika.com](https://technestbybhavika.com)
+- ✍️ **Articles**: [medium.com/@bhavi.28.mantri](https://medium.com/@bhavi.28.mantri)
 
-🔗 Website: technestbybhavika.com
+---
 
-✍️ Articles: medium.com/@bhavi.28.mantri
+## 📜 License
 
-License
+**MIT © Bhavika Mantri** — Free to use, fork, and build on.
 
-MIT © Bhavika Mantri — Free to use, fork, and build on.
