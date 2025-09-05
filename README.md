@@ -57,7 +57,7 @@ Welcome to the repository powering **TechNest by Bhavika** — a fully automated
 git clone https://github.com/bhavikam28/tech-blog.git
 cd tech-blog
 hugo server -D
-
+```
 
 Visit: http://localhost:1313
 
