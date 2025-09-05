@@ -21,7 +21,8 @@ Welcome to the repository powering [TechNest by Bhavika](https://technestbybhavi
 
 ## Architecture Overview
 
-![DevOps Architecture Diagram](./956d0f15-3513-4c6b-92bc-8c516a7fd798.png)
+<img width="1536" height="596" alt="image" src="https://github.com/user-attachments/assets/de616713-fb57-48b0-968e-bfdcca170084" />
+
 
 - **GitHub Actions Workflow** triggers on code push.
 - Three jobs: `infra_job`, `build_job`, `deploy_job`.
@@ -87,7 +88,7 @@ Open the `hugo.toml` file and update the following:
 
 ---
 
-## 📦 Build & Deploy
+## Build & Deploy
 
 Deployment is fully automated using **GitHub Actions**.
 
@@ -103,7 +104,7 @@ Deployment is fully automated using **GitHub Actions**.
 
 ---
 
-## ✍️ Published Blog Posts
+## Published Blog Posts
 
 Published directly via this platform:
 
@@ -113,7 +114,7 @@ Published directly via this platform:
 
 ---
 
-## 📚 About
+## About
 
 This project is part of my portfolio from the **Cloud Talents AWS DevOps Bootcamp**, designed to showcase real-world **IaC**, **CI/CD**, and **AWS security** integrations using **Terraform** and **GitHub Actions**.
 
@@ -122,7 +123,7 @@ This project is part of my portfolio from the **Cloud Talents AWS DevOps Bootcam
 
 ---
 
-## 📜 License
+## License
 
 **MIT © Bhavika Mantri** — Free to use, fork, and build on.
 
