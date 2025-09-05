@@ -6,7 +6,7 @@ Welcome to the repository powering **TechNest by Bhavika** — a fully automated
 
 ---
 
-## 📐 Architecture Overview
+## Architecture Overview
 
 <img width="1794" height="712" alt="image" src="https://github.com/user-attachments/assets/de5716d5-f18a-4db3-971a-d352b33291ab" />
 
@@ -19,7 +19,7 @@ Welcome to the repository powering **TechNest by Bhavika** — a fully automated
 
 ---
 
-## ✨ Features
+## Features
 
 - Static site generation with Hugo  
 - Full CI/CD using GitHub Actions  
@@ -31,7 +31,7 @@ Welcome to the repository powering **TechNest by Bhavika** — a fully automated
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 | Category        | Tools & Services                                 |
 |----------------|--------------------------------------------------|
@@ -44,14 +44,14 @@ Welcome to the repository powering **TechNest by Bhavika** — a fully automated
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### ✅ Prerequisites
 - [Git](https://git-scm.com/)
 - [Hugo (extended version)](https://gohugo.io/)
 - [Terraform CLI](https://developer.hashicorp.com/terraform)
 
-### 💻 Local Development
+### Local Development
 
 ```bash
 git clone https://github.com/bhavikam28/tech-blog.git
@@ -61,7 +61,7 @@ hugo server -D
 
 Visit: http://localhost:1313
 
-## 🔧 Configuration
+## Configuration
 
 Open the `hugo.toml` file and update the following:
 
@@ -72,7 +72,7 @@ Open the `hugo.toml` file and update the following:
 
 ---
 
-## 📦Build & Deploy
+## Build & Deploy
 
 Deployment is fully automated using **GitHub Actions**.
 
@@ -88,7 +88,7 @@ Deployment is fully automated using **GitHub Actions**.
 
 ---
 
-## ✍️Published Blog Posts
+## Published Blog Posts
 
 Published directly via this platform:
 
@@ -98,7 +98,7 @@ Published directly via this platform:
 
 ---
 
-## 📚About
+## About
 
 This project is part of my portfolio from the **Cloud Talents AWS DevOps Bootcamp**, designed to showcase real-world **IaC**, **CI/CD**, and **AWS security** integrations using **Terraform** and **GitHub Actions**.
 
@@ -107,7 +107,7 @@ This project is part of my portfolio from the **Cloud Talents AWS DevOps Bootcam
 
 ---
 
-## 📜 License
+## License
 
 **MIT © Bhavika Mantri** — Free to use, fork, and build on.
 
