@@ -70,8 +70,53 @@ Welcome to the repository powering [TechNest by Bhavika](https://technestbybhavi
 git clone https://github.com/bhavikam28/tech-blog.git
 cd tech-blog
 hugo server -D
+```
 
+Visit: http://localhost:1313
+
+Configuration
+
+Edit hugo.toml:
+
+Set baseURL = "https://technestbybhavika.com"
+
+Update author name, social links, and profile image URL
+
+Build & Deploy
+
+Deployment is fully automated via GitHub Actions.
+
+GitHub Workflow Overview
+
+infra_job: Provisions infrastructure (S3, CloudFront, IAM roles, ACM)
+
+build_job: Builds the static blog site with Hugo
+
+deploy_job: Uploads files to S3 and invalidates CloudFront cache
+
+OIDC is used for secure role assumption without hardcoded secrets.
+
+More details in the full write-up on Medium
+.
+
+Published Blog Posts
+
+Published directly via this platform:
+
+AWS Managed Services: Real-World DevOps Use Cases
+
+Auto-Scaling MVP Architecture on AWS
+
+VPC Networking Deep Dive
+
+About
+
+This project is part of my portfolio from the Cloud Talents AWS DevOps Bootcamp, designed to showcase real-world IaC, CI/CD, and AWS security integrations using Terraform and GitHub.
+
+🔗 Website: technestbybhavika.com
+
+✍️ Articles: medium.com/@bhavi.28.mantri
 
 License
 
-This repository is licensed under the MIT License. See the LICENSE file for details.
+MIT © Bhavika Mantri — Free to use, fork, and build on.
