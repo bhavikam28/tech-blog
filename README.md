@@ -1,114 +1,133 @@
-# 🚀 TechNest by Bhavika — Automated DevOps Blog on AWS
+# TechNest by Bhavika — Automated DevOps Blog on AWS
 
-Welcome to the repository powering [**TechNest by Bhavika**](https://technestbybhavika.com) — a fully automated, scalable, and secure personal tech blog built with **Hugo**, **GitHub Actions**, **Terraform**, and **AWS**.
+This repository powers [technestbybhavika.com](https://technestbybhavika.com), a fully automated, secure, and scalable tech blog built using Hugo, GitHub Actions, Terraform, and AWS services.
 
-> 🎯 **Goal**: Build a production-grade, secure, cost-effective, and CI/CD-enabled tech blog powered by Infrastructure-as-Code and GitOps workflows.
-
----
-
-## 🗂️ Table of Contents
-- [📸 Architecture Overview](#-architecture-overview)
-- [⚙️ Features](#️-features)
-- [🚀 Tech Stack](#-tech-stack)
-- [🛠️ Getting Started](#️-getting-started)
-- [📦 Build & Deploy](#-build--deploy)
-- [✍️ Blog Posts](#-blog-posts)
-- [📚 About This Project](#-about-this-project)
-- [🤝 Contributing](#-contributing)
-- [📜 License](#-license)
+The goal was to build a production-grade, low-maintenance blog platform that incorporates Infrastructure-as-Code (IaC), CI/CD pipelines, and best practices for cloud security and performance.
 
 ---
 
-## 📸 Architecture Overview
-
-<img width="1536" height="596" alt="image" src="https://github.com/user-attachments/assets/98bbfcef-ae9f-4ee7-b6c8-02e2729272de" />
-
-
-This architecture supports a secure and automated blog deployment pipeline:
-
-- **S3**: Hosts the static Hugo site
-- **CloudFront**: Distributes content globally with low latency
-- **OIDC Integration**: Ensures secure credential-less access between GitHub, Terraform Cloud, and AWS
-- **GitHub Actions**: Runs CI/CD jobs for provisioning, building, and deploying
-
----
-
-## ⚙️ Features
-
-✅ Hugo-based static site generation  
-✅ AWS S3 + CloudFront setup with secure OAC  
-✅ Infrastructure-as-Code with Terraform  
-✅ CI/CD with GitHub Actions workflows  
-✅ CloudFront cache invalidation on deploy  
-✅ OIDC-based secretless authentication  
-✅ SSL via AWS ACM  
-✅ GitOps-enabled automation  
-✅ Easy to manage and extend
+## Table of Contents
+- [Architecture Overview](#architecture-overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Build & Deploy](#build--deploy)
+- [Blog Posts](#blog-posts)
+- [About This Project](#about-this-project)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
-## 🚀 Tech Stack
+## Architecture Overview
 
-- **Frontend**: [Hugo](https://gohugo.io/) — Fast static site generator
-- **CI/CD**: [GitHub Actions](https://docs.github.com/en/actions)
-- **IaC**: [Terraform](https://www.terraform.io/) + HCP (Terraform Cloud)
-- **Cloud Services**: AWS S3, CloudFront, ACM, IAM, OIDC
-- **Auth**: OIDC between GitHub & AWS, Terraform & AWS
+![Tech Blog DevOps Pipeline](./956d0f15-3513-4c6b-92bc-8c516a7fd798.png)
+
+This architecture implements the following:
+
+- Static blog content is built using Hugo.
+- GitHub Actions triggers three CI/CD jobs: `infra_job`, `build_job`, and `deploy_job`.
+- Terraform provisions AWS infrastructure using remote backend (HCP).
+- GitHub and Terraform authenticate with AWS using OpenID Connect (OIDC) without long-lived credentials.
+- Content is hosted on S3 and served securely via CloudFront with Origin Access Control (OAC).
 
 ---
 
-## 🛠️ Getting Started
+## Features
 
-### 📥 Prerequisites
-- [Git](https://git-scm.com/)
-- [Hugo (extended)](https://gohugo.io/getting-started/installing/)
-- [Terraform](https://www.terraform.io/downloads)
+- Static site generation using Hugo
+- CI/CD pipeline with GitHub Actions
+- Infrastructure provisioning via Terraform
+- Secure, credential-less OIDC-based authentication
+- Global content delivery using AWS CloudFront
+- HTTPS with ACM SSL certificate
+- Cache invalidation after every deployment
+- Modular and scalable file structure
 
-### 🧪 Local Development
+---
+
+## Tech Stack
+
+**Static Site Generator**  
+- Hugo
+
+**Infrastructure as Code (IaC)**  
+- Terraform (with HCP as backend)
+
+**CI/CD Automation**  
+- GitHub Actions
+
+**AWS Services**  
+- S3 (static hosting)  
+- CloudFront (CDN)  
+- IAM (with OIDC role assumption)  
+- ACM (SSL/TLS)  
+- Route 53 (custom domain)
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Git
+- Hugo (extended version)
+- Terraform
+
+### Local Development
 ```bash
 git clone https://github.com/bhavikam28/tech-blog.git
 cd tech-blog
 hugo server -D
+
 Visit: http://localhost:1313
 
-⚙️ Configuration
-Update hugo.toml:
+Configuration
 
-baseURL = "https://technestbybhavika.com"
+Edit hugo.toml:
 
-Add your LinkedIn, GitHub, name, and profile photo links
+Set baseURL to your domain
 
-📦 Build & Deploy
-Deployment is automated using GitHub Actions + OIDC roles.
+Update author name, social links, and profile image
 
-🛠️ GitHub Actions Workflow
-infra_job: Provisions AWS (S3, CloudFront, IAM, ACM)
+Build & Deploy
 
-build_job: Builds Hugo site and stores artifacts
+Deployment is fully automated via GitHub Actions.
 
-deploy_job: Deploys to S3, invalidates CloudFront cache
+GitHub Workflow Overview
 
-OIDC ensures secure, short-lived credentials — no secrets or access keys required!
+infra_job: Provisions infrastructure (S3, CloudFront, IAM roles, ACM)
 
-📖 Read the full blog post on how this pipeline works
+build_job: Builds the static blog site with Hugo
 
-✍️ Blog Posts
-These posts were written and published from this site:
+deploy_job: Uploads files to S3 and invalidates CloudFront cache
 
-📘 AWS Managed Services: Real-World DevOps Use Cases
+OIDC is used for secure role assumption without hardcoded secrets.
 
-🚀 Auto-Scaling MVP Architecture on AWS
+More details in the full write-up
+.
 
-🌐 Building Secure VPC and Networking Setup on AWS
+Blog Posts
 
-📚 About This Project
-This project was built as part of my AWS DevOps portfolio in the Cloud Talents Bootcamp.
+Published directly via this platform:
 
-🔗 Visit the live blog
-✍️ Also published on Medium
+AWS Managed Services: Real-World DevOps Use Cases
 
-🤝 Contributing
-Feel free to fork this repo, raise an issue, or submit a pull request. Suggestions are always welcome!
+Auto-Scaling MVP Architecture on AWS
 
-📜 License
-MIT © Bhavika Mantri — Open-source, feel free to reuse with credit.
+Secure VPC and Networking Setup on AWS
+
+About This Project
+
+This project was created as part of my portfolio during the Cloud Talents AWS DevOps Bootcamp. It reflects practical cloud and DevOps experience including secure IAM practices, GitOps workflows, and scalable infrastructure design.
+
+Live site: technestbybhavika.com
+
+Related article: Medium Blog Post
+
+Contributing
+
+Open to feedback and collaboration. Please create an issue or pull request if you'd like to contribute.
+
+License
+
+This repository is licensed under the MIT License. See the LICENSE file for details.
