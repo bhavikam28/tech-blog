@@ -1,98 +1,113 @@
-# Blog Template for AWS DevOps Engineer Bootcamp Participants
+# 🚀 TechNest by Bhavika — Automated DevOps Blog on AWS
 
-Welcome to the Blog Template designed for participants of the **FREE** AWS DevOps Engineer Bootcamp offered by the [Cloud Talents community](https://www.skool.com/cloudtalents/about)! 
+Welcome to the repository powering [**TechNest by Bhavika**](https://technestbybhavika.com) — a fully automated, scalable, and secure personal tech blog built with **Hugo**, **GitHub Actions**, **Terraform**, and **AWS**.
 
-This repository provides a starting point for creating your own blog to document your journey through the bootcamp.
-
-## Table of Contents
-
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Configuration](#configuration)
-- [Running the Blog Locally](#running-the-blog-locally)
-- [Building the Blog](#building-the-blog)
-- [About the AWS Bootcamp](#about-the-aws-bootcamp)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Getting Started
-
-### Prerequisites
-
-Before you begin, ensure you have the following installed:
-
-- [Git](https://git-scm.com/downloads)
-- [Hugo](https://gohugo.io/getting-started/installing/) (Extended version recommended)
-
-### Installation
-
-1. **Fork the Repository**
-
-   Click the "Fork" button at the top-right corner of this repository to create your own copy.
-
-2. **Clone Your Fork**
-
-   ```bash
-   git clone https://github.com/yourusername/your-forked-repo.git
-   ```
-
-3. **Navigate to the Project Directory**
-
-   ```bash
-   cd your-forked-repo
-   ```
-
-### Configuration
-
-Customize your blog by replacing placeholder variables in the `hugo.toml` file:
-
-- **`NAME_OF_YOUR_BLOG`**: Replace with the title of your blog.
-- **`LINK_TO_YOUR_PHOTO_BELOW`**: Replace with the URL to your personal photo.
-- **`YOUR_LINKEDIN_LINK`**: Replace with the link to your LinkedIn profile.
-- **`YOUR_NAME`**: Replace with your full name.
-
-Open `hugo.toml` in a text editor and make the necessary changes.
-
-## Running the Blog Locally
-
-Start the Hugo development server to view your blog locally:
-
-```bash
-hugo server -D
-```
-
-- **`-D`**: Includes content marked as drafts.
-
-Open your web browser and navigate to **[http://localhost:1313](http://localhost:1313)** to see your blog in action.
-
-## Building the Blog
-
-Generate the static files for deployment:
-
-```bash
-hugo
-```
-
-- The generated files will be located in the `public/` directory.
-- You can deploy these files to any static hosting service.
-
-## About the AWS DevOps Engineer Bootcamp
-
-This blog template is part of the **FREE** [Cloud Talents AWS DevOps Enginneer Bootcamp](https://www.skool.com/cloudtalents/about), a program for individuals interested in learning Amazon Web Services and DevOps practices. 
-
-The bootcamp covers a wide range of AWS services and provides hands-on experience through practical assignments.
-
-- **Website**: [AWS DevOps Engineer Bootcamp](https://www.skool.com/cloudtalents/about)
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request for any improvements.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+> 🎯 **Goal**: Build a production-grade, secure, cost-effective, and CI/CD-enabled tech blog powered by Infrastructure-as-Code and GitOps workflows.
 
 ---
 
-Happy blogging and enjoy your journey through the AWS Bootcamp!
+## 🗂️ Table of Contents
+- [📸 Architecture Overview](#-architecture-overview)
+- [⚙️ Features](#️-features)
+- [🚀 Tech Stack](#-tech-stack)
+- [🛠️ Getting Started](#️-getting-started)
+- [📦 Build & Deploy](#-build--deploy)
+- [✍️ Blog Posts](#-blog-posts)
+- [📚 About This Project](#-about-this-project)
+- [🤝 Contributing](#-contributing)
+- [📜 License](#-license)
+
+---
+
+## 📸 Architecture Overview
+
+![Tech Blog DevOps Pipeline](./956d0f15-3513-4c6b-92bc-8c516a7fd798.png)
+
+This architecture supports a secure and automated blog deployment pipeline:
+
+- **S3**: Hosts the static Hugo site
+- **CloudFront**: Distributes content globally with low latency
+- **OIDC Integration**: Ensures secure credential-less access between GitHub, Terraform Cloud, and AWS
+- **GitHub Actions**: Runs CI/CD jobs for provisioning, building, and deploying
+
+---
+
+## ⚙️ Features
+
+✅ Hugo-based static site generation  
+✅ AWS S3 + CloudFront setup with secure OAC  
+✅ Infrastructure-as-Code with Terraform  
+✅ CI/CD with GitHub Actions workflows  
+✅ CloudFront cache invalidation on deploy  
+✅ OIDC-based secretless authentication  
+✅ SSL via AWS ACM  
+✅ GitOps-enabled automation  
+✅ Easy to manage and extend
+
+---
+
+## 🚀 Tech Stack
+
+- **Frontend**: [Hugo](https://gohugo.io/) — Fast static site generator
+- **CI/CD**: [GitHub Actions](https://docs.github.com/en/actions)
+- **IaC**: [Terraform](https://www.terraform.io/) + HCP (Terraform Cloud)
+- **Cloud Services**: AWS S3, CloudFront, ACM, IAM, OIDC
+- **Auth**: OIDC between GitHub & AWS, Terraform & AWS
+
+---
+
+## 🛠️ Getting Started
+
+### 📥 Prerequisites
+- [Git](https://git-scm.com/)
+- [Hugo (extended)](https://gohugo.io/getting-started/installing/)
+- [Terraform](https://www.terraform.io/downloads)
+
+### 🧪 Local Development
+```bash
+git clone https://github.com/bhavikam28/tech-blog.git
+cd tech-blog
+hugo server -D
+Visit: http://localhost:1313
+
+⚙️ Configuration
+Update hugo.toml:
+
+baseURL = "https://technestbybhavika.com"
+
+Add your LinkedIn, GitHub, name, and profile photo links
+
+📦 Build & Deploy
+Deployment is automated using GitHub Actions + OIDC roles.
+
+🛠️ GitHub Actions Workflow
+infra_job: Provisions AWS (S3, CloudFront, IAM, ACM)
+
+build_job: Builds Hugo site and stores artifacts
+
+deploy_job: Deploys to S3, invalidates CloudFront cache
+
+OIDC ensures secure, short-lived credentials — no secrets or access keys required!
+
+📖 Read the full blog post on how this pipeline works
+
+✍️ Blog Posts
+These posts were written and published from this site:
+
+📘 AWS Managed Services: Real-World DevOps Use Cases
+
+🚀 Auto-Scaling MVP Architecture on AWS
+
+🌐 Building Secure VPC and Networking Setup on AWS
+
+📚 About This Project
+This project was built as part of my AWS DevOps portfolio in the Cloud Talents Bootcamp.
+
+🔗 Visit the live blog
+✍️ Also published on Medium
+
+🤝 Contributing
+Feel free to fork this repo, raise an issue, or submit a pull request. Suggestions are always welcome!
+
+📜 License
+MIT © Bhavika Mantri — Open-source, feel free to reuse with credit.
